@@ -1,0 +1,37 @@
+.sequencer {
+  height: 200px;
+  width: 500px;
+  border-radius: 20px;
+  background-color: cornflowerblue;
+  box-shadow: -1px 2.5px 2px black, 1px 0.5px 2px black;
+}
+
+.buttonGrid {
+  display: grid;
+  width: 92%;
+  height: 81%;
+  padding: 4%;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 8px 8px;
+}
+
+.sequencerButton {
+  background-color: lightblue;
+  box-shadow: -1px 2px 2px black, 0.5px 0.5px 2px black;
+  border-radius: 2px;
+}
+
+.on {
+  background-color: orange;
+}
+
+.off {
+  background-color: lightblue;
+
+}
+
+.glow {
+  box-shadow: -1px 1px 5px darkorange, 1px -1px 10px darkorange;
+  border-radius: 3px;
+}
