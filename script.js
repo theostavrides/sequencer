@@ -1,20 +1,35 @@
 //  --------------- SEQUENCER ----------------
-function createSequencer(parent, size){
-  let sequencer = document.createElement('div')
-  sequencer.classList.add('sequencer', 'align-middle')
-  let buttonGrid = document.createElement('div');
-  buttonGrid.classList.add('buttonGrid')
-  sequencer.appendChild(buttonGrid);
+function createSequencer(parent){
+  const sequencerContainer = createSequencerContainer();
+  const buttonGrid         = createButtonGrid();
+  sequencerContainer.appendChild(buttonGrid);
+  addButtons(buttonGrid);
+  addSequencerClickEvents(buttonGrid);
+  parent.appendChild(sequencerContainer);
+}
 
-  //Add sequencer buttons
+function createSequencerContainer(){
+  let sequencerContainer = document.createElement('div');
+  sequencerContainer.classList.add('sequencer', 'align-middle');
+  return sequencerContainer;
+}
+
+function createButtonGrid(){
+  let buttonGrid = document.createElement('div');
+  buttonGrid.classList.add('buttonGrid');
+  return buttonGrid;
+}
+
+function addButtons(buttonGrid){
   for (let i = 0; i < 96; i++) {
     let sequencerButton = document.createElement('div');
     sequencerButton.classList.add('sequencerButton', 'off');
     buttonGrid.appendChild(sequencerButton);
   }
+}
 
+function addSequencerClickEvents(buttonGrid){
   buttonGrid.addEventListener('click', toggle);
-
   function toggle(e) {
     if (e.target.classList.contains('sequencerButton')){
       let classList = e.target.classList;
@@ -27,9 +42,6 @@ function createSequencer(parent, size){
       }
     }
   }
-
-  parent.appendChild(sequencer);
 }
 
-createSequencer(document.body);
-
+createSequencer(document.body)
