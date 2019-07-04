@@ -29,20 +29,16 @@ let sequencerData = [
 ]
 
 //  --------------- SEQUENCER ----------------
-function createSequencer(parent, options){
-  const sequencer  = createSequencerDiv();
-  const buttonGrid = createButtonGrid();
-  sequencer.appendChild(buttonGrid);
-  addButtons(buttonGrid);
-  addSequencerClickEvents(buttonGrid);
-  parent.appendChild(sequencer);
-}
+
+//                    MAIN
 
 function createSequencerDiv(){
   let sequencer = document.createElement('div');
   sequencer.classList.add('sequencer', 'align-middle');
   return sequencer;
 }
+
+//                   BUTTONS
 
 function createButtonGrid(){
   let buttonGrid = document.createElement('div');
@@ -57,6 +53,24 @@ function addButtons(buttonGrid){
     buttonGrid.appendChild(sequencerButton);
   }
 }
+
+//                 BEAT LIGHTS
+
+function createBeatLightGrid(){
+  let beatLightGrid = document.createElement('div');
+  beatLightGrid.classList.add('beatLightGrid');
+  return beatLightGrid;
+}
+
+function addBeatLights(beatLightGrid){
+  for (let i = 0; i < 16; i++) {
+    let beatLight = document.createElement('div');
+    beatLight.classList.add('beatLight');
+    beatLightGrid.appendChild(beatLight);
+  }
+}
+
+//                CLICK EVENTS
 
 function addSequencerClickEvents(buttonGrid){
   buttonGrid.addEventListener('click', toggle);
@@ -92,6 +106,20 @@ function addSequencerClickEvents(buttonGrid){
   }
 }
 
+//                    RENDER
+
+function createSequencer(parent, options){
+  const sequencer     = createSequencerDiv();
+  const buttonGrid    = createButtonGrid();
+  const beatLightGrid = createBeatLightGrid();
+  addButtons(buttonGrid);
+  addBeatLights(beatLightGrid);
+  addSequencerClickEvents(buttonGrid);
+  sequencer.appendChild(buttonGrid);
+  sequencer.appendChild(beatLightGrid);
+  parent.appendChild(sequencer);
+}
+
 createSequencer(document.body);
 
 // -------------- SEQUENCER LOOP ---------------
@@ -99,6 +127,7 @@ createSequencer(document.body);
 let currentBeat = 0;
 
 function loop(){
+  handleBeatLight(currentBeat);
   playColumn(currentBeat);
   currentBeat >= 15 ? currentBeat = 0 : currentBeat++;
 }
@@ -117,6 +146,18 @@ function playColumn(currentBeat){
     sample.currentTime = 0;
     sample.play();
   }
+}
+
+function handleBeatLight(currentBeat){
+  const beatLights = document.getElementsByClassName('beatLightGrid')[0].children;
+  if (currentBeat === 0) {
+    beatLights[15].classList.remove('beatLightOn');
+  } else {
+    beatLights[currentBeat - 1].classList.remove('beatLightOn');
+  }
+  beatLights[currentBeat].classList.add('beatLightOn');
+
+
 }
 
 
