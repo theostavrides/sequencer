@@ -5,7 +5,7 @@ let snare = new Audio('808/snare.mp3');
 let hhatc = new Audio('808/hhatc.mp3');
 let hhato = new Audio('808/hhato.mp3');
 let clap = new Audio('808/clap.mp3');
-let clave = new Audio('808/clave.wav');
+let cowbell = new Audio('808/cowbell.wav');
 
 //-----------------  DATA ----------------------
 
@@ -139,7 +139,7 @@ function playColumn(currentBeat){
   if (column[2] === 1) playSound(hhatc);
   if (column[3] === 1) playSound(hhato);
   if (column[4] === 1) playSound(clap);
-  if (column[5] === 1) playSound(clave);
+  if (column[5] === 1) playSound(cowbell);
 
   function playSound(sample){
     sample.pause();
@@ -163,8 +163,9 @@ function handleBeatLight(currentBeat){
 
 
 let button = document.getElementById('start')
-button.addEventListener('click', ()=>{
+button.addEventListener('click', (e)=>{
   setInterval(loop, 250)
+  console.log(e.target.parentNode.removeChild(e.target))
 })
 
 
