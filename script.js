@@ -10,22 +10,22 @@ let clave = new Audio('808/clave.wav');
 //-----------------  DATA ----------------------
 
 let sequencerData = [
-  [1,0,0,1,0,0],
-  [0,0,1,1,0,0],
-  [1,1,0,0,0,0],
-  [0,0,1,1,0,0],
-  [1,0,0,0,0,0],
-  [0,0,1,0,0,0],
-  [1,1,0,0,0,0],
-  [0,0,1,0,0,0],
-  [1,0,0,0,0,0],
-  [0,0,1,0,0,1],
-  [1,1,0,0,0,0],
-  [0,0,1,1,0,1],
-  [1,0,0,0,0,0],
-  [0,0,1,0,0,0],
-  [1,1,0,0,0,0],
-  [0,0,1,0,0,1],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0]
 ]
 
 //  --------------- SEQUENCER ----------------
@@ -60,31 +60,39 @@ function addButtons(buttonGrid){
 
 function addSequencerClickEvents(buttonGrid){
   buttonGrid.addEventListener('click', toggle);
-  function toggle(e) {
-    // Handle data
-    let index = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
-    console.log(index)
 
-    // Handle Visuals
-    if (e.target.classList.contains('sequencerButton')){
-      let classList = e.target.classList;
-      if (classList.contains('off')){
-        classList.remove('off');
-        classList.add('on')
-      } else {
-        classList.remove('on');
-        classList.add('off')
-      }
+  function toggle(e) {
+    if (e.target.classList.contains('sequencerButton')) {
+      handleData(e);
+      handleVisuals(e);
     }
   }
-  function logCoordinate(e) {
-    console.log(e.target)
+
+  function handleData(e){
+    let index = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
+    let columnNumber = index % 16;
+    let rowNumber    = Math.floor(index / 16);
+    if (sequencerData[columnNumber][rowNumber] === 0) {
+      sequencerData[columnNumber][rowNumber] = 1;
+    } else {
+      sequencerData[columnNumber][rowNumber] = 0;
+    }
+
+  }
+
+  function handleVisuals(e){
+    let classList = e.target.classList;
+    if (classList.contains('off')){
+      classList.remove('off');
+      classList.add('on')
+    } else {
+      classList.remove('on');
+      classList.add('off')
+    }
   }
 }
 
-
 createSequencer(document.body);
-
 
 // -------------- SEQUENCER LOOP ---------------
 
@@ -97,17 +105,24 @@ function loop(){
 
 function playColumn(currentBeat){
   const column = sequencerData[currentBeat];
-    if (column[0] === 1) kick.play();
-    if (column[1] === 1) snare.play();
-    if (column[2] === 1) hhatc.play();
-    if (column[3] === 1) hhato.play();
-    if (column[4] === 1) clap.play();
-    if (column[5] === 1) clave.play();
+  if (column[0] === 1) playSound(kick);
+  if (column[1] === 1) playSound(snare);
+  if (column[2] === 1) playSound(hhatc);
+  if (column[3] === 1) playSound(hhato);
+  if (column[4] === 1) playSound(clap);
+  if (column[5] === 1) playSound(clave);
+
+  function playSound(sample){
+    sample.pause();
+    sample.currentTime = 0;
+    sample.play();
+  }
 }
 
 
 
-document.body.addEventListener('click', ()=>{
+let button = document.getElementById('start')
+button.addEventListener('click', ()=>{
   setInterval(loop, 250)
 })
 
