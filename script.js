@@ -1,5 +1,5 @@
 //  --------------- SEQUENCER ----------------
-function createSequencer(parent){
+function createSequencer(parent, options){
   const sequencerContainer = createSequencerContainer();
   const buttonGrid         = createButtonGrid();
   sequencerContainer.appendChild(buttonGrid);
@@ -44,4 +44,30 @@ function addSequencerClickEvents(buttonGrid){
   }
 }
 
-createSequencer(document.body)
+createSequencer(document.body);
+
+
+//---------------- Audio ---------------
+
+let kick = new Audio('808/kick.wav');
+let snare = new Audio('808/snare.mp3');
+let hhatc = new Audio('808/hhatc.mp3');
+let hhato = new Audio('808/hhato.mp3');
+let clap = new Audio('808/clap.mp3');
+let clave = new Audio('808/clave.wav');
+
+setTimeout(()=>{
+  setInterval(()=>{kick.play()}, 1000);
+},1000)
+
+setTimeout(()=>{
+  setInterval(()=>{snare.play()}, 500);
+},1750)
+
+setTimeout(()=>{
+  setInterval(()=>{clap.play()}, 1000);
+},1750)
+
+
+
+
