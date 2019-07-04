@@ -1,3 +1,33 @@
+//------------------ AUDIO ---------------------
+
+let kick = new Audio('808/kick.wav');
+let snare = new Audio('808/snare.mp3');
+let hhatc = new Audio('808/hhatc.mp3');
+let hhato = new Audio('808/hhato.mp3');
+let clap = new Audio('808/clap.mp3');
+let clave = new Audio('808/clave.wav');
+
+//-----------------  DATA ----------------------
+
+let sequencerData = [
+  [1,0,0,1,0,0],
+  [0,0,1,1,0,0],
+  [1,1,0,0,0,0],
+  [0,0,1,1,0,0],
+  [1,0,0,0,0,0],
+  [0,0,1,0,0,0],
+  [1,1,0,0,0,0],
+  [0,0,1,0,0,0],
+  [1,0,0,0,0,0],
+  [0,0,1,0,0,1],
+  [1,1,0,0,0,0],
+  [0,0,1,1,0,1],
+  [1,0,0,0,0,0],
+  [0,0,1,0,0,0],
+  [1,1,0,0,0,0],
+  [0,0,1,0,0,1],
+]
+
 //  --------------- SEQUENCER ----------------
 function createSequencer(parent, options){
   const sequencer  = createSequencerDiv();
@@ -31,6 +61,11 @@ function addButtons(buttonGrid){
 function addSequencerClickEvents(buttonGrid){
   buttonGrid.addEventListener('click', toggle);
   function toggle(e) {
+    // Handle data
+    let index = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
+    console.log(index)
+
+    // Handle Visuals
     if (e.target.classList.contains('sequencerButton')){
       let classList = e.target.classList;
       if (classList.contains('off')){
@@ -42,44 +77,13 @@ function addSequencerClickEvents(buttonGrid){
       }
     }
   }
+  function logCoordinate(e) {
+    console.log(e.target)
+  }
 }
 
 
 createSequencer(document.body);
-
-//---------------- DEMO SETUP ------------------
-
-let buttons = document.getElementsByClassName('buttonGrid')[0].childNodes;
-let sequencerData = [
-  [1,0,0,1,0,0],
-  [0,0,1,1,0,0],
-  [1,1,0,0,0,0],
-  [0,0,1,1,0,0],
-  [1,0,0,0,0,0],
-  [0,0,1,0,0,0],
-  [1,1,0,0,0,0],
-  [0,0,1,0,0,0],
-  [1,0,0,0,0,0],
-  [0,0,1,0,0,1],
-  [1,1,0,0,0,0],
-  [0,0,1,1,0,1],
-  [1,0,0,0,0,0],
-  [0,0,1,0,0,0],
-  [1,1,0,0,0,0],
-  [0,0,1,0,0,1],
-
-]
-
-
-
-//------------------ AUDIO ---------------------
-
-let kick = new Audio('808/kick.wav');
-let snare = new Audio('808/snare.mp3');
-let hhatc = new Audio('808/hhatc.mp3');
-let hhato = new Audio('808/hhato.mp3');
-let clap = new Audio('808/clap.mp3');
-let clave = new Audio('808/clave.wav');
 
 
 // -------------- SEQUENCER LOOP ---------------
@@ -88,7 +92,6 @@ let currentBeat = 0;
 
 function loop(){
   playColumn(currentBeat);
-  console.log(currentBeat)
   currentBeat >= 15 ? currentBeat = 0 : currentBeat++;
 }
 
