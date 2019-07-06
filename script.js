@@ -120,7 +120,7 @@ function createSequencer(parent){
   initialize();
 }
 
-// --------------- PIANO ROLL ------------------
+// ------------------ PIANO ---------------------
 function createPiano(parent){
   function initialize(){
     const piano         = createPianoDiv();
