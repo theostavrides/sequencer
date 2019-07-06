@@ -31,7 +31,7 @@ let sequencerData = [
 //  --------------- SEQUENCER ----------------
 
 
-function createSequencer(parent, options){
+function createSequencer(parent){
   function initialize(){
     const sequencer     = createSequencerDiv();
     const buttonGrid    = createButtonGrid();
@@ -120,8 +120,92 @@ function createSequencer(parent, options){
   initialize();
 }
 
+// --------------- PIANO ROLL ------------------
+function createPiano(parent){
+  function initialize(){
+    const piano         = createPianoDiv();
+    const keyboard      = createKeyboardDiv();
+    const whiteKeysGrid = createWhiteKeysGrid();
+    const blackKeysGrid = createBlackKeysGrid();
+    const noteGrid      = createNoteGrid();
+
+    addWhiteKeys(whiteKeysGrid);
+    addBlackKeys(blackKeysGrid);
+    addNoteButtons(noteGrid);
+
+    keyboard.appendChild(whiteKeysGrid);
+    keyboard.appendChild(blackKeysGrid);
+    piano.appendChild(keyboard);
+    piano.appendChild(noteGrid);
+    parent.appendChild(piano);
+  }
+
+  function createPianoDiv(){
+    let piano = document.createElement('div');
+    piano.classList.add('piano', 'align-middle');
+    return piano;
+  }
+
+  function createKeyboardDiv(){
+    let keyboard = document.createElement('div');
+    keyboard.classList.add('keyboard');
+    return keyboard;
+  }
+
+  function createWhiteKeysGrid(){
+    let whiteKeysGrid = document.createElement('div');
+    whiteKeysGrid.classList.add('whiteKeysGrid');
+    return whiteKeysGrid;
+  }
+
+  function addWhiteKeys(whiteKeysGrid){
+    for (let i = 0; i < 21; i++) {
+      let whiteKey = document.createElement('div');
+      whiteKey.classList.add('whiteKey')
+      whiteKeysGrid.appendChild(whiteKey)
+    }
+  }
+
+  function createBlackKeysGrid(){
+    let blackKeysGrid = document.createElement('div');
+    blackKeysGrid.classList.add('blackKeysGrid');
+    return blackKeysGrid;
+  }
+
+  function addBlackKeys(blackKeysGrid){
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 12; j++) {
+        if (j === 1 || j === 3 || j === 5 || j === 8 || j === 10) {
+          let blackKey = document.createElement('div')
+          blackKey.classList.add('blackKey');
+          blackKeysGrid.appendChild(blackKey);
+        } else {
+          blackKeysGrid.appendChild(document.createElement('div'))
+        }
+
+      }
+    }
+
+  }
+
+  function createNoteGrid(){
+    let noteGrid = document.createElement('div');
+    noteGrid.classList.add('noteGrid');
+    return noteGrid;
+  }
+
+  function addNoteButtons(noteGrid){
+    for (let i = 0; i < 36 * 16; i++){
+      let noteButton = document.createElement('div');
+      noteButton.classList.add('noteButton');
+      noteGrid.appendChild(noteButton);
+    }
+  }
 
 
+  initialize();
+
+}
 // -------------- SEQUENCER LOOP ---------------
 
 function loop(){
@@ -163,8 +247,11 @@ function loop(){
   setInterval(nextTick, 250);
 }
 
+let instrumentDiv = document.getElementById('instruments');
+createSequencer(instrumentDiv);
+createPiano(instrumentDiv);
 
-createSequencer(document.body);
+
 
 
 let button = document.getElementById('start')
