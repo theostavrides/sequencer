@@ -1,5 +1,5 @@
 # sequencer
-A set of sequencers for music composition within the browser. Vanilla JS.
+A set of sequencers for music composition within the browser. Vanilla JS, HTML, & CSS.
 
 ## Screenshots
 <img src="https://raw.githubusercontent.com/theostavrides/sequencer/master/screenshot.png" 
