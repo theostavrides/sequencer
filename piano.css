@@ -4,8 +4,8 @@
   justify-content: center;
   height: 500px;
   width: 620px;
-  padding: 20px;
-  background-color: azure;
+  padding: 15px 10px 15px 10px;
+  background-color: ghostwhite;
   box-shadow: -1px 2.5px 2px black, 1px 0.5px 2px black;
   border-radius: 20px;
 }
@@ -20,11 +20,10 @@
   position: absolute;
   height: 100%;
   width: 43px;
-  background-color: gray;
+  background-color: darkgray;
   display: grid;
   grid-template-rows: repeat(3, 3fr 5fr 5fr 3fr 3fr 5fr 3fr);
   grid-gap: 2px;
-  border: 1px solid black;
   border-radius: 10px 0px 0px 10px;
   overflow: hidden;
 
@@ -33,7 +32,7 @@
 .whiteKey {
   background-color: white;
   box-shadow: -1px 0px 1px white, -1px 0px 1px white;
-  border-radius: 0px 4px 4px 0px;
+  border-radius: 0px 3px 3px 0px;
 
 
 }
@@ -42,7 +41,7 @@
   position: absolute;
   height: 100%;
   width: 42px;
-  border: 1px solid black;
+  border: 1px solid gray;
   display: grid;
   grid-template-rows: repeat(36, 1fr);
   grid-gap: 1px;
@@ -66,12 +65,14 @@
   grid-template-rows: repeat(36, 1fr);
   grid-template-columns: repeat(16, 1fr);
   grid-gap: 1px;
-  background-color:black;
-  border: 1px solid black;
+  background-color: black;
+  border: 1px solid gray;
+  border-radius: 0px 10px 10px 0px;
+  overflow: hidden;
 }
 
 .noteButton {
-  background-color: gray;
+  background-color: lightsteelblue;
 }
 
 
