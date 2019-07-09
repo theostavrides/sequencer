@@ -1,11 +1,14 @@
 //------------------ AUDIO ---------------------
 
+
 let kick = new Audio('808/kick.wav');
 let snare = new Audio('808/snare.mp3');
 let hhatc = new Audio('808/hhatc.mp3');
 let hhato = new Audio('808/hhato.mp3');
 let clap = new Audio('808/clap.mp3');
 let maraca = new Audio('808/maraca.wav');
+
+
 
 //-----------------  DATA ----------------------
 
@@ -226,7 +229,7 @@ function createPiano(parent){
       let columnNumber = index % 16;
       let rowNumber    = Math.floor(index / 16);
       let dataIndex    = pianoData[columnNumber].indexOf(rowNumber)
-      if (dataIndex == -1){
+      if (dataIndex === -1){
         pianoData[columnNumber].push(rowNumber);
       } else {
         pianoData[columnNumber].splice(rowNumber, 1);
