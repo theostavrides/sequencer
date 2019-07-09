@@ -63,6 +63,7 @@
   grid-gap: 1px;
   background-color: whitesmoke;
   border: 1px solid gray;
+  border-left: 1px solid whitesmoke;
   border-radius: 0px 1px 1px 0px;
   overflow: hidden;
   box-shadow: -1px 0px 1px gray, 0.5px 0.5px 1px gray;
@@ -72,4 +73,9 @@
   background-color: lightsteelblue;
 }
 
+.noteButton.on {
+  background-color: lightslategray;
+  border-radius: 2px;
+  overflow: hidden;
+}
 

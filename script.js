@@ -28,6 +28,14 @@ let sequencerData = [
   [0,0,0,0,0,0]
 ]
 
+let pianoData = [
+
+]
+
+for (let i = 0; i < 16; i++) {
+  pianoData.push([]);
+}
+
 //  --------------- SEQUENCER ----------------
 
 
@@ -198,13 +206,43 @@ function createPiano(parent){
   function addNoteButtons(noteGrid){
     for (let i = 0; i < 36 * 16; i++){
       let noteButton = document.createElement('div');
-      noteButton.classList.add('noteButton');
+      noteButton.classList.add('noteButton', 'off');
       noteGrid.appendChild(noteButton);
     }
   }
 
   function addNoteGridClickEvents(noteGrid){
+    noteGrid.addEventListener('click', toggle);
 
+    function toggle(e){
+      if (e.target.classList.contains('noteButton')) {
+        handleData(e);
+        handleVisuals(e);
+      }
+    }
+
+    function handleData(e){
+      let index        = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
+      let columnNumber = index % 16;
+      let rowNumber    = Math.floor(index / 16);
+      let dataIndex    = pianoData[columnNumber].indexOf(rowNumber)
+      if (dataIndex == -1){
+        pianoData[columnNumber].push(rowNumber);
+      } else {
+        pianoData[columnNumber].splice(rowNumber, 1);
+      }
+    }
+
+    function handleVisuals(e){
+      let classList = e.target.classList;
+      if (classList.contains('off')){
+        classList.remove('off');
+        classList.add('on')
+      } else {
+        classList.remove('on');
+        classList.add('off')
+      }
+    }
   }
 
 
