@@ -132,6 +132,7 @@ function createPiano(parent){
     addWhiteKeys(whiteKeysGrid);
     addBlackKeys(blackKeysGrid);
     addNoteButtons(noteGrid);
+    addNoteGridClickEvents(noteGrid);
 
     keyboard.appendChild(whiteKeysGrid);
     keyboard.appendChild(blackKeysGrid);
@@ -200,6 +201,10 @@ function createPiano(parent){
       noteButton.classList.add('noteButton');
       noteGrid.appendChild(noteButton);
     }
+  }
+
+  function addNoteGridClickEvents(noteGrid){
+
   }
 
 
