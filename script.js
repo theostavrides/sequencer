@@ -8,7 +8,8 @@ let hhato = new Audio('808/hhato.mp3');
 let clap = new Audio('808/clap.mp3');
 let maraca = new Audio('808/maraca.wav');
 
-let synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
+var distortion = new Tone.Distortion().toMaster();
+let synth = new Tone.PolySynth(6, Tone.Synth).connect(distortion).toMaster();
 
 
 
