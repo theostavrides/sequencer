@@ -8,7 +8,22 @@ let hhato = new Audio('808/hhato.mp3');
 let clap = new Audio('808/clap.mp3');
 let maraca = new Audio('808/maraca.wav');
 
-let synth = new Tone.FMSynth().toMaster()
+let synth = new Tone.MembraneSynth({
+  pitchDecay  : 0.05,
+  octaves  : 3,
+  oscillator  : {
+    type: 'sine'
+    },
+  envelope  : {
+    attack  : 0.00001,
+    decay  : 0.4,
+    sustain  : 0.01,
+    release  : 1.4,
+    attackCurve  : 'exponential'
+    }
+  }
+)
+synth.toMaster();
 
 
 //-----------------  DATA ----------------------
@@ -237,7 +252,7 @@ function createPiano(parent){
       if (dataIndex === -1){
         pianoData[columnNumber].push(rowNumber);
       } else {
-        pianoData[columnNumber].splice(rowNumber, 1);
+        pianoData[columnNumber] = pianoData[columnNumber].filter(e => e !== rowNumber);
       }
     }
 
@@ -271,12 +286,15 @@ function loop(){
   function playColumn(currentBeat){
     //play sequencer sounds
     const sequencerColumn = sequencerData[currentBeat];
-    if (sequencerColumn[0] === 1) playSound(kick);
-    if (sequencerColumn[1] === 1) playSound(snare);
-    if (sequencerColumn[2] === 1) playSound(hhatc);
-    if (sequencerColumn[3] === 1) playSound(hhato);
-    if (sequencerColumn[4] === 1) playSound(clap);
-    if (sequencerColumn[5] === 1) playSound(maraca);
+      //offset sounds to sync with synth
+    setTimeout(()=>{
+      if (sequencerColumn[0] === 1) playSound(kick);
+      if (sequencerColumn[1] === 1) playSound(snare);
+      if (sequencerColumn[2] === 1) playSound(hhatc);
+      if (sequencerColumn[3] === 1) playSound(hhato);
+      if (sequencerColumn[4] === 1) playSound(clap);
+      if (sequencerColumn[5] === 1) playSound(maraca);
+    }, 100)
 
     //play piano sounds
     const pianoColumn = pianoData[currentBeat];
