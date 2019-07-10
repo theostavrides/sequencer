@@ -8,22 +8,8 @@ let hhato = new Audio('808/hhato.mp3');
 let clap = new Audio('808/clap.mp3');
 let maraca = new Audio('808/maraca.wav');
 
-let synth = new Tone.MembraneSynth({
-  pitchDecay  : 0.05,
-  octaves  : 3,
-  oscillator  : {
-    type: 'sine'
-    },
-  envelope  : {
-    attack  : 0.00001,
-    decay  : 0.4,
-    sustain  : 0.01,
-    release  : 1.4,
-    attackCurve  : 'exponential'
-    }
-  }
-)
-synth.toMaster();
+let synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
+
 
 
 //-----------------  DATA ----------------------
