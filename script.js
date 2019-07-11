@@ -8,8 +8,18 @@ let hhato = new Audio('808/hhato.mp3');
 let clap = new Audio('808/clap.mp3');
 let maraca = new Audio('808/maraca.wav');
 
-var distortion = new Tone.Distortion().toMaster();
-let synth = new Tone.PolySynth(6, Tone.Synth).connect(distortion).toMaster();
+
+// var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
+// var delay = new Tone.FeedbackDelay(0.5);
+// //connecting the synth to reverb through delay
+// var synth = new Tone.DuoSynth().chain(delay, reverb);
+
+
+var reverb = new Tone.JCReverb(0.7).connect(Tone.Master);
+var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
+var vol = new Tone.Volume(-15).toMaster();
+let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, reverb, feedbackDelay);
+
 
 
 
@@ -263,6 +273,8 @@ function createPiano(parent){
 
 function loop(){
   let currentBeat = 0;
+  const offset = 150;  // used with setTimout to sync piano and synth
+
 
   function nextTick(){
     handleBeatLight(currentBeat);
@@ -273,7 +285,7 @@ function loop(){
   function playColumn(currentBeat){
     //play sequencer sounds
     const sequencerColumn = sequencerData[currentBeat];
-      //offset sounds to sync with synth
+
     setTimeout(()=>{
       if (sequencerColumn[0] === 1) playSound(kick);
       if (sequencerColumn[1] === 1) playSound(snare);
@@ -281,7 +293,7 @@ function loop(){
       if (sequencerColumn[3] === 1) playSound(hhato);
       if (sequencerColumn[4] === 1) playSound(clap);
       if (sequencerColumn[5] === 1) playSound(maraca);
-    }, 100)
+    }, offset)
 
     //play piano sounds
     const pianoColumn = pianoData[currentBeat];
@@ -309,12 +321,15 @@ function loop(){
 
   function handleBeatLight(currentBeat){
     const beatLights = document.getElementsByClassName('beatLightGrid')[0].children;
-    if (currentBeat === 0) {
-      beatLights[15].classList.remove('beatLightOn');
-    } else {
-      beatLights[currentBeat - 1].classList.remove('beatLightOn');
-    }
-    beatLights[currentBeat].classList.add('beatLightOn');
+    setTimeout(()=>{
+      if (currentBeat === 0) {
+        beatLights[15].classList.remove('beatLightOn');
+      } else {
+        beatLights[currentBeat - 1].classList.remove('beatLightOn');
+      }
+      beatLights[currentBeat].classList.add('beatLightOn');
+    }, offset)
+
   }
 
   setInterval(nextTick, 250);
