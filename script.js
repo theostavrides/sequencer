@@ -15,8 +15,6 @@ var vol = new Tone.Volume(-15).toMaster();
 let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, reverb, feedbackDelay);
 
 
-
-
 //-----------------  DATA ----------------------
 
 let sequencerData = [
@@ -48,14 +46,6 @@ let pianoData = [
 
 let notes = ['B', 'A#', 'A', 'G#', 'G', 'F#', 'F', 'E', 'D#', 'D', 'C#', 'C'];
 
-
-
-//  --------------- SEQUENCER ----------------
-
-
-
-
-// ------------------ PIANO ---------------------
 
 // -------------- SEQUENCER LOOP ---------------
 
