@@ -9,12 +9,6 @@ let clap = new Audio('808/clap.mp3');
 let maraca = new Audio('808/maraca.wav');
 
 
-// var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
-// var delay = new Tone.FeedbackDelay(0.5);
-// //connecting the synth to reverb through delay
-// var synth = new Tone.DuoSynth().chain(delay, reverb);
-
-
 var reverb = new Tone.JCReverb(0.7).connect(Tone.Master);
 var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
 var vol = new Tone.Volume(-15).toMaster();
