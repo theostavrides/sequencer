@@ -12,6 +12,10 @@ class Instrument {
     this._data[column].push(value);
   }
 
+  deleteValue(column, value){
+    this._data[column] = this._data[column].filter(e => e !== value);
+  }
+
   get active(){
     return this._active;
   }
@@ -36,16 +40,19 @@ class Sequencer extends Instrument {
   constructor(options = {}){
     super();
     this.kit = '808';
-    this.sample0 = new Audio('808/kick.wav');
-    this.sample1 = new Audio('808/snare.mp3');
-    this.sample2 = new Audio('808/hhatc.mp3');
-    this.sample3 = new Audio('808/hhato.mp3');
-    this.sample4 = new Audio('808/clap.mp3');
-    this.sample5 = new Audio('808/maraca.wav');
+    this.sample0 = 0
+    this.sample1 = 1
+    this.sample2 = 2
+    this.sample3 = 3
+    this.sample4 = 4
+    this.sample5 = 5
     this.volumes = [100,100,100,100,100,100];
     this.pans    = [50, 50, 50, 50, 50, 50];
   }
 }
 
-let x = new Piano();
-console.log(x.eat())
+let piano = new Piano();
+piano.addValue(3,24);
+piano.addValue(14,2);
+piano.deleteValue(3,24);
+console.log(piano.data)
