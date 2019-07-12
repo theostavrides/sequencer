@@ -8,6 +8,10 @@ class Instrument {
     return this._data;
   }
 
+  set data(data){
+    this._data = data;
+  }
+
   addValue(column, value){
     this._data[column].push(value);
   }
@@ -39,7 +43,7 @@ class Piano extends Instrument {
 class Sequencer extends Instrument {
   constructor(options = {}){
     super();
-    this._kit = '808';
+    this._baseKit = '808';
     this._samples = ['808clap.wav', '808kick.mp3', '808hhc.mp3', '808hho.mp3', '808clap.mp3', '808shaker.wav'];
     this._volumes = [100, 100, 100, 100, 100, 100];
     this._pans    = [50, 50, 50, 50, 50, 50];
