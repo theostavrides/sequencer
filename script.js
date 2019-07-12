@@ -118,14 +118,24 @@ function loop(){
   setInterval(nextTick, 250);
 }
 
-let instrumentDiv = document.getElementById('instruments');
-createSequencer(instrumentDiv);
-createPiano(instrumentDiv);
+function attachInstruments(){
+  let instrumentDiv = document.getElementById('instruments');
+  let col1 = document.getElementById('column1');
+  let col2 = document.getElementById('column2');
+  createSequencer(col1);
+  createOptionsPanel(col1);
+  createPiano(col2);
+  instrumentDiv.appendChild(col1);
+  instrumentDiv.appendChild(col2);
+}
 
-let button = document.getElementById('start')
-button.addEventListener('click', (e)=>{
+
+attachInstruments();
+
+let playButton = document.getElementById('play')
+playButton.addEventListener('click', (e)=>{
   loop();
-  e.target.parentNode.removeChild(e.target);
+
 })
 
 

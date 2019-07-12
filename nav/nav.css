@@ -1,0 +1,15 @@
+nav {
+  background-color: dimgray;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 2px solid black;
+
+}
+
+#playpause {
+  width: 132px;
+  opacity: 0.8;
+  padding:8px;
+}

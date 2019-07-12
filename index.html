@@ -2,22 +2,42 @@
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" type="text/css" href="nav/nav.css">
   <link rel="stylesheet" type="text/css" href="layout.css">
   <link rel="stylesheet" type="text/css" href="sequencer/sequencer.css">
   <link rel="stylesheet" type="text/css" href="piano/piano.css">
+  <link rel="stylesheet" type="text/css" href="options/options.css">
 </head>
 <body>
-  <button id=start>start</button><br><br>
-  <div id="instruments"></div>
+  <nav>
+    <div id="playpause">
+      <img src="images/play.png" id="play" />
+      <img src="images/pause.png" id="pause" />
 
+    </div>
+
+  </nav>
+
+  <div id="instruments">
+    <div id="column1"></div>
+    <div id="column2"></div>
+  </div>
+
+
+
+
+
+
+  <!-- Scripts -->
   <script src="https://unpkg.com/tone"></script>
   <script src="https://unpkg.com/@tonejs/ui"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js"></script>
 
   <script src="piano/piano.js"></script>
   <script src="sequencer/sequencer.js"></script>
+  <script src="options/options.js"></script>
   <script src="script.js"></script>
-  <script src="data.js"></script>
+
 
 </body>
 </html>
