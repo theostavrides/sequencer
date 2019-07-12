@@ -277,30 +277,12 @@ function loop(){
   }
 
   function playColumn(currentBeat){
-    //play sequencer sounds
-    const sequencerColumn = sequencerData[currentBeat];
+    playSequencerColumn(currentBeat);
+    playPianoColumn(currentBeat);
+  }
 
-    setTimeout(()=>{
-      if (sequencerColumn[0] === 1) playSound(kick);
-      if (sequencerColumn[1] === 1) playSound(snare);
-      if (sequencerColumn[2] === 1) playSound(hhatc);
-      if (sequencerColumn[3] === 1) playSound(hhato);
-      if (sequencerColumn[4] === 1) playSound(clap);
-      if (sequencerColumn[5] === 1) playSound(maraca);
-    }, offset)
-
-    //play piano sounds
+  function playPianoColumn(currentBeat){
     const pianoColumn = pianoData[currentBeat];
-    for (let e of pianoColumn) {
-      synth.triggerAttackRelease(getNote(e), '8n');
-    }
-
-    // makes sure sample has stopped before playing
-    function playSound(sample){
-      sample.pause();
-      sample.currentTime = 0;
-      sample.play();
-    }
 
     function getNote(gridRowNumber){
       if (gridRowNumber < 12){
@@ -311,6 +293,29 @@ function loop(){
         return notes[gridRowNumber - 24] + '3';
       }
     }
+
+    for (let e of pianoColumn) {
+      synth.triggerAttackRelease(getNote(e), '8n');
+    }
+  }
+
+  function playSequencerColumn(currentBeat){
+    const sequencerColumn = sequencerData[currentBeat];
+
+    function playSound(sample){
+      sample.pause();
+      sample.currentTime = 0;
+      sample.play();
+    }
+
+    setTimeout(()=>{
+      if (sequencerColumn[0] === 1) playSound(kick);
+      if (sequencerColumn[1] === 1) playSound(snare);
+      if (sequencerColumn[2] === 1) playSound(hhatc);
+      if (sequencerColumn[3] === 1) playSound(hhato);
+      if (sequencerColumn[4] === 1) playSound(clap);
+      if (sequencerColumn[5] === 1) playSound(maraca);
+    }, offset)
   }
 
   function handleBeatLight(currentBeat){
@@ -332,9 +337,6 @@ function loop(){
 let instrumentDiv = document.getElementById('instruments');
 createSequencer(instrumentDiv);
 createPiano(instrumentDiv);
-
-
-
 
 let button = document.getElementById('start')
 button.addEventListener('click', (e)=>{
