@@ -6,3 +6,39 @@
   box-shadow: -1px 2px 2px black, 1px 0.5px 2px black;
   margin-top: 19px;
 }
+
+#optionsBox {
+  width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
+  height: 86%;
+  background-color: moccasin;
+  border-radius: 2px;
+  box-shadow: -1px 2px 2px black, 0.5px 0.5px 2px black;
+
+}
+
+#tabs {
+  padding-top: 1%;
+  height: 6%;
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  width: 20%;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: moccasin;
+  transform: perspective(4px) rotateX(1deg);
+  box-shadow: -1px 2px 2px black, 0.5px 0.5px 2px black;
+
+}
+
+.tab p {
+  font-size: 12px;
+  font-family: 'Inconsolata', monospace;
+  margin-top: 0;
+  transform: initial;
+}
