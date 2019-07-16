@@ -10,5 +10,9 @@ function createOptionsPanel(parent){
     return options;
   }
 
+  function createTabsDib(){
+    let tabsDiv = document.createElement('div')
+  }
+
   initialize();
 }

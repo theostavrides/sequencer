@@ -1,18 +1,19 @@
 nav {
   font-family: 'Inconsolata', monospace;
   background-color: indigo;
-  height: 40px;
+  height: 44px;
   display: flex;
   justify-content: space-between;
   padding-left: 23px;
   padding-right: 0px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
 }
 
 nav h1 {
+  color: oldlace;
   font-size: 20px;
-  color: plum;
   padding: 0px;
+  padding-top: 2px;
   margin: 0px;
   line-height: 40px;
   text-align: center;
@@ -38,7 +39,7 @@ nav h1 {
 .patternBox {
   height: 30px;
   width: 8%;
-  background-color: darkorchid;
+  background-color: darkorchid; /*darkorchid*/
   color: white;
   border-radius: 5px;
   display: grid;
@@ -55,7 +56,7 @@ nav h1 {
   padding-top: 10px;
   line-height: 0px;
   text-align: center;
-  color: floralwhite;
+  color: oldlace;
 }
 
 .patternBox img {
@@ -67,9 +68,9 @@ nav h1 {
 }
 
 .patternLightBox {
+  background-color: indigo;
   border-top: 1px solid mediumvioletred;
   grid-column: 1 / span 2;
-  background-color: indigo;
   border-radius: 0px 0px 5px 5px;
   display: flex;
   justify-content: center;
