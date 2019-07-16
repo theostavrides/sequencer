@@ -24,11 +24,7 @@ nav h1 {
   padding-top: 0px;
 }
 
-nav img {
-  height: 30px;
-  width: 30px;
-  padding-top: 8px;
-}
+
 
 
 #patterns {
@@ -43,14 +39,13 @@ nav img {
   height: 30px;
   width: 8%;
   background-color: darkorchid;
-/*  border: 1px solid darkturquoise;
-*/  color: white;
+  color: white;
   border-radius: 5px;
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: 60% 40%;
   box-shadow: -1px 2px 2px red, 1px 2px 2px red, -0px -0.5px 4px red;
-  border: 1px solid black;
+  border: 1px solid orangered;
 }
 
 .patternBox p {
