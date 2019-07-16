@@ -49,16 +49,18 @@ nav img {
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: 60% 40%;
-  box-shadow: -1px 2px 2px red, 1px 0.5px 2px red;
+  box-shadow: -1px 2px 2px red, 1px 2px 2px red, -0px -0.5px 4px red;
+  border: 1px solid black;
 }
 
 .patternBox p {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
   padding-top: 10px;
   line-height: 0px;
   text-align: center;
-  color: bisque;
+  color: floralwhite;
 }
 
 .patternBox img {
@@ -70,10 +72,20 @@ nav img {
 }
 
 .patternLightBox {
+  border-top: 1px solid mediumvioletred;
   grid-column: 1 / span 2;
   background-color: indigo;
   border-radius: 0px 0px 5px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
+.patternLight {
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: red;
+  box-shadow: 0.5px 0px 2px red, -0.5px 0px 2px red;
+}
 

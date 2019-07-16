@@ -1,6 +1,6 @@
+
 //------------------ AUDIO ---------------------
 
-//comment
 let kick = new Audio('808/kick.wav');
 let snare = new Audio('808/snare.mp3');
 let hhatc = new Audio('808/hhatc.mp3');
@@ -13,6 +13,7 @@ var reverb = new Tone.JCReverb(0.7).connect(Tone.Master);
 var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
 var vol = new Tone.Volume(-15).toMaster();
 let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, reverb, feedbackDelay);
+
 
 
 //-----------------  DATA ----------------------
@@ -137,7 +138,6 @@ playButton.addEventListener('click', (e)=>{
   loop();
 
 })
-
 
 
 
