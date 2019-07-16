@@ -1,6 +1,6 @@
 nav {
   font-family: 'Inconsolata', monospace;
-  background-color: indigo;
+  background-color: black;
   height: 44px;
   display: flex;
   justify-content: space-between;
@@ -26,8 +26,6 @@ nav h1 {
 }
 
 
-
-
 #patterns {
   width: 50%;
   height: 100%;
@@ -39,7 +37,7 @@ nav h1 {
 .patternBox {
   height: 30px;
   width: 8%;
-  background-color: darkorchid; /*darkorchid*/
+  background-color: slateblue; /*darkorchid*/
   color: white;
   border-radius: 5px;
   display: grid;
