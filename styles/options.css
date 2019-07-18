@@ -85,19 +85,25 @@
   font-size: 12px;
 }
 
-.sampleDropdown {
+#sequencerOptionsGrid .sampleDropdown {
   width: 80%;
-  border: 1px solid black;
+  border: 1px solid dimgray;
+  cursor: default;
+
+}
+
+#sequencerOptionsGrid .sampleDropdown:hover {
+  background-color: mediumaquamarine;
 }
 
 .panbox {
   width: 30px;
-  border: 1px solid black;
+  border: 1px solid dimgray;
 }
 
 .volbox {
   width: 30px;
-  border: 1px solid black;
+  border: 1px solid dimgray;
 }
 
 

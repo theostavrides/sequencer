@@ -83,7 +83,7 @@ function createOptionsPanel(parent){
       const pan = document.createElement('div');
       pan.classList.add('pan');
       const panbox = document.createElement('div');
-      panbox.innerHTML = 80;
+      panbox.innerHTML = 50;
       panbox.classList.add('panbox');
       pan.appendChild(panbox);
 
