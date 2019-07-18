@@ -1,3 +1,4 @@
+// idea for data structure;
 class Instrument {
   constructor(){
     this._data = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];
