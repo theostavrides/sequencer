@@ -60,13 +60,12 @@ nav h1 {
 }
 
 .patternBox img {
-  padding-top: 2px;
-  padding-left: 8px;
+  padding: 2px 8px 2px 8px;
   margin: 0;
   height: 8px;
   width: 8px;
-
 }
+
 
 .patternLightBox {
   background-color: black;
