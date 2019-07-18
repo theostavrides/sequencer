@@ -20,28 +20,19 @@ let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, reverb, feedbackDelay);
 
 let currentPatternView = 1; // this is the pattern that the user is currently viewing.
 
-let patternOnOffState = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // which patterns are on or off
-
-let allData = [
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-]
-
-
+let patternOnOffState = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]; // which patterns are on or off
 
 let sequencerData = [
-  [],[],[],[],
-  [],[],[],[],
-  [],[],[],[],
-  [],[],[],[]
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
 ]
 
 let pianoData = [
@@ -69,7 +60,13 @@ function loop(){
   }
 
   function playColumn(currentBeat){
-    playSequencerColumn(currentBeat);
+    // checks to see which patterns are turned on, and plays their columns
+    for (let i = 0; i < patternOnOffState.length; i++) {
+      if (patternOnOffState[i]) {
+        playSequencerColumn(sequencerData[i], currentBeat);
+      }
+    }
+
     playPianoColumn(currentBeat);
   }
 
@@ -91,8 +88,8 @@ function loop(){
     }
   }
 
-  function playSequencerColumn(currentBeat){
-    const sequencerColumn = sequencerData[currentBeat];
+  function playSequencerColumn(sequencerPattern, currentBeat){
+    const sequencerColumn = sequencerPattern[currentBeat];
 
     function playSound(sample){
       sample.pause();

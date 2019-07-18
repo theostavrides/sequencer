@@ -66,11 +66,11 @@ function createSequencer(parent){
       let index = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
       let columnNumber = index % 16;
       let rowNumber    = Math.floor(index / 16);
-      let dataIndex    = sequencerData[columnNumber].indexOf(rowNumber)
+      let dataIndex    = sequencerData[currentPatternView][columnNumber].indexOf(rowNumber)
       if (dataIndex === -1){
-        sequencerData[columnNumber].push(rowNumber);
+        sequencerData[currentPatternView][columnNumber].push(rowNumber);
       } else {
-        sequencerData[columnNumber] = sequencerData[columnNumber].filter(e => e !== rowNumber);
+        sequencerData[currentPatternView][columnNumber] = sequencerData[currentPatternView][columnNumber].filter(e => e !== rowNumber);
       }
     }
 
