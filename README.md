@@ -2,7 +2,7 @@
 A set of sequencers for music composition within the browser. 
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/20251327/61426990-458cd700-a8d1-11e9-866e-905aeebebcc5.png)" 
+<img src="https://user-images.githubusercontent.com/20251327/61427016-6a814a00-a8d1-11e9-975a-a8c347520ef1.png" 
      width="100%"/>
 
 ## Installation 
