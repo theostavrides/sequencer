@@ -18,23 +18,30 @@ let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, reverb, feedbackDelay);
 
 //-----------------  DATA ----------------------
 
+let currentPatternView = 1; // this is the pattern that the user is currently viewing.
+
+let patternOnOffState = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // which patterns are on or off
+
+let allData = [
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+]
+
+
+
 let sequencerData = [
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0],
-  [0,0,0,0,0,0]
+  [],[],[],[],
+  [],[],[],[],
+  [],[],[],[],
+  [],[],[],[]
 ]
 
 let pianoData = [
@@ -94,12 +101,15 @@ function loop(){
     }
 
     setTimeout(()=>{
-      if (sequencerColumn[0] === 1) playSound(kick);
-      if (sequencerColumn[1] === 1) playSound(snare);
-      if (sequencerColumn[2] === 1) playSound(hhatc);
-      if (sequencerColumn[3] === 1) playSound(hhato);
-      if (sequencerColumn[4] === 1) playSound(clap);
-      if (sequencerColumn[5] === 1) playSound(maraca);
+      for (sample of sequencerColumn) {
+        if (sample === 0) playSound(kick);
+        if (sample === 1) playSound(snare);
+        if (sample === 2) playSound(hhatc);
+        if (sample === 3) playSound(hhato);
+        if (sample === 4) playSound(clap);
+        if (sample === 5) playSound(maraca);
+      }
+
     }, offset)
   }
 
