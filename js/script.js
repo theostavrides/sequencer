@@ -1,4 +1,3 @@
-
 //------------------ AUDIO ---------------------
 
 //808
@@ -139,6 +138,4 @@ playButton.addEventListener('click', (e)=>{
   loop();
 
 })
-
-
 
