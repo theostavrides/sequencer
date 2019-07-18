@@ -50,14 +50,14 @@ function createOptionsPanel(parent){
     sequencerOptions.appendChild(grid);
 
     //add table tible
-    let tableTitleText = ['row', 'sample', 'vol', 'pan']
+    let tableTitleText = ['', 'sample', 'vol', 'pan']
     for (let i = 0; i < 4; i++) {
       const div = document.createElement('div');
       div.classList.add('tableTitle');
       div.innerHTML = tableTitleText[i];
       grid.appendChild(div);
     }
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       const rowNumber = document.createElement('div');
       rowNumber.classList.add('rowNumber');
       rowNumber.innerHTML = i + 1;

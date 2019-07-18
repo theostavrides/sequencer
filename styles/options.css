@@ -71,9 +71,9 @@
   display: grid;
   grid-template-columns: 1fr 4fr 2fr 2fr;
   grid-template-rows: 1.5fr 2fr 2fr 2fr 2fr 2fr 2fr;
-  background-color: white;
+  background-color: tan;
   grid-gap: 1px;
-  border: 1px solid white;
+  /*border: 1px solid white;*/
 }
 
 #sequencerOptionsGrid div {
