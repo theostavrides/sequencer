@@ -54,3 +54,40 @@
   margin-top: 0;
   transform: initial;
 }
+
+/* Sequencer Options */
+
+#sequencerOptions {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sequencerOptionsGrid {
+  height: 80%;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr 2fr;
+  grid-template-rows: 1.5fr 2fr 2fr 2fr 2fr 2fr 2fr;
+  background-color: white;
+  grid-gap: 1px;
+  border: 1px solid white;
+}
+
+#sequencerOptionsGrid div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: moccasin;
+  font-family: 'Inconsolata', monospace;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
