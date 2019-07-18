@@ -1,13 +1,16 @@
 //------------------ AUDIO ---------------------
 
 //808
-let kick = new Audio('808/kick.wav');
-let snare = new Audio('808/snare.mp3');
-let hhatc = new Audio('808/hhatc.mp3');
-let hhato = new Audio('808/hhato.mp3');
-let clap = new Audio('808/clap.mp3');
-let maraca = new Audio('808/maraca.wav');
 
+
+let s0 = new Audio('808/kick.wav');
+let s1 = new Audio('808/snare.mp3');
+let s2 = new Audio('808/hhatc.mp3');
+let s3 = new Audio('808/hhato.mp3');
+let s4 = new Audio('808/clap.mp3');
+let s5 = new Audio('808/maraca.wav');
+
+let samples = [s0,s1,s2,s3,s4,s5];
 
 var reverb = new Tone.JCReverb(0.7).connect(Tone.Master);
 var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
@@ -34,6 +37,19 @@ let sequencerData = [
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
 ];
+
+let sequencerSampleData = [
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+  [0,1,2,3,4,5],
+]
 
 let pianoData = [
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
@@ -69,12 +85,10 @@ function loop(){
     // checks to see which patterns are turned on, and plays their columns
     for (let i = 0; i < patternOnOffState.length; i++) {
       if (patternOnOffState[i]) {
-        playSequencerColumn(sequencerData[i], currentBeat);
+        playSequencerColumn(sequencerData[i], sequencerSampleData[i], currentBeat);
         playPianoColumn(pianoData[i], currentBeat);
       }
     }
-
-
   }
 
   function playPianoColumn(pianoPattern, currentBeat){
@@ -95,7 +109,7 @@ function loop(){
     }
   }
 
-  function playSequencerColumn(sequencerPattern, currentBeat){
+  function playSequencerColumn(sequencerPattern, sequencerSampleData, currentBeat){
     const sequencerColumn = sequencerPattern[currentBeat];
 
     function playSound(sample){
@@ -105,13 +119,8 @@ function loop(){
     }
 
     setTimeout(()=>{
-      for (sample of sequencerColumn) {
-        if (sample === 0) playSound(kick);
-        if (sample === 1) playSound(snare);
-        if (sample === 2) playSound(hhatc);
-        if (sample === 3) playSound(hhato);
-        if (sample === 4) playSound(clap);
-        if (sample === 5) playSound(maraca);
+      for (let sampleId of sequencerColumn) {
+        playSound(samples[sampleId]);
       }
 
     }, offset)
