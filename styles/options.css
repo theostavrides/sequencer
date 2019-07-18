@@ -67,9 +67,9 @@
 
 #sequencerOptionsGrid {
   height: 80%;
-  width: 90%;
+  width: 80%;
   display: grid;
-  grid-template-columns: 1fr 4fr 2fr 2fr;
+  grid-template-columns: 0.5fr 4fr 1.5fr 1.5fr;
   grid-template-rows: 1.5fr 2fr 2fr 2fr 2fr 2fr 2fr;
   background-color: tan;
   grid-gap: 1px;
@@ -85,9 +85,20 @@
   font-size: 12px;
 }
 
+.sampleDropdown {
+  width: 80%;
+  border: 1px solid black;
+}
 
+.panbox {
+  width: 30px;
+  border: 1px solid black;
+}
 
-
+.volbox {
+  width: 30px;
+  border: 1px solid black;
+}
 
 
 

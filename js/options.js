@@ -49,7 +49,7 @@ function createOptionsPanel(parent){
     grid.id              = 'sequencerOptionsGrid';
     sequencerOptions.appendChild(grid);
 
-    //add table tible
+    //add table title
     let tableTitleText = ['', 'sample', 'vol', 'pan']
     for (let i = 0; i < 4; i++) {
       const div = document.createElement('div');
@@ -57,16 +57,36 @@ function createOptionsPanel(parent){
       div.innerHTML = tableTitleText[i];
       grid.appendChild(div);
     }
+
+    let initial_samples = ['808 - kick','808 - snare','808 - hhatc','808 - hhato','808 - clap','808 - maraca'];
+    //add rows
     for (let i = 0; i < 6; i++) {
       const rowNumber = document.createElement('div');
       rowNumber.classList.add('rowNumber');
       rowNumber.innerHTML = i + 1;
+
       const sample = document.createElement('div');
       sample.classList.add('sample');
+      const sampleDropdown = document.createElement('div');
+      sampleDropdown.classList.add('sampleDropdown');
+      sampleDropdown.innerHTML = initial_samples[i];
+      sample.appendChild(sampleDropdown);
+
       const volume = document.createElement('div');
       volume.classList.add('volume');
+      const volbox = document.createElement('div');
+      volbox.classList.add('volbox');
+      volbox.innerHTML = 80;
+      volume.appendChild(volbox);
+
+
       const pan = document.createElement('div');
       pan.classList.add('pan');
+      const panbox = document.createElement('div');
+      panbox.innerHTML = 80;
+      panbox.classList.add('panbox');
+      pan.appendChild(panbox);
+
       grid.appendChild(rowNumber);
       grid.appendChild(sample);
       grid.appendChild(volume);
