@@ -33,14 +33,20 @@ let sequencerData = [
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
-]
+];
 
 let pianoData = [
-  [],[],[],[],
-  [],[],[],[],
-  [],[],[],[],
-  [],[],[],[]
-]
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+  [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
+];
 
 
 let notes = ['B', 'A#', 'A', 'G#', 'G', 'F#', 'F', 'E', 'D#', 'D', 'C#', 'C'];
@@ -64,14 +70,15 @@ function loop(){
     for (let i = 0; i < patternOnOffState.length; i++) {
       if (patternOnOffState[i]) {
         playSequencerColumn(sequencerData[i], currentBeat);
+        playPianoColumn(pianoData[i], currentBeat);
       }
     }
 
-    playPianoColumn(currentBeat);
+
   }
 
-  function playPianoColumn(currentBeat){
-    const pianoColumn = pianoData[currentBeat];
+  function playPianoColumn(pianoPattern, currentBeat){
+    const pianoColumn = pianoPattern[currentBeat];
 
     function getNote(gridRowNumber){
       if (gridRowNumber < 12){

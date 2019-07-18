@@ -94,11 +94,11 @@ function createPiano(parent){
       let index        = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
       let columnNumber = index % 16;
       let rowNumber    = Math.floor(index / 16);
-      let dataIndex    = pianoData[columnNumber].indexOf(rowNumber)
+      let dataIndex    = pianoData[currentPatternView][columnNumber].indexOf(rowNumber)
       if (dataIndex === -1){
-        pianoData[columnNumber].push(rowNumber);
+        pianoData[currentPatternView][columnNumber].push(rowNumber);
       } else {
-        pianoData[columnNumber] = pianoData[columnNumber].filter(e => e !== rowNumber);
+        pianoData[currentPatternView][columnNumber] = pianoData[currentPatternView][columnNumber].filter(e => e !== rowNumber);
       }
     }
 
