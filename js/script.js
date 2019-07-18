@@ -82,10 +82,9 @@ function loop(){
   }
 
   function playColumn(currentBeat){
-    // checks to see which patterns are turned on, and plays their columns
     for (let i = 0; i < patternOnOffState.length; i++) {
       if (patternOnOffState[i]) {
-        playSequencerColumn(sequencerData[i], sequencerSampleData[i], currentBeat);
+        playSequencerColumn(i, currentBeat);
         playPianoColumn(pianoData[i], currentBeat);
       }
     }
@@ -109,8 +108,10 @@ function loop(){
     }
   }
 
-  function playSequencerColumn(sequencerPattern, sequencerSampleData, currentBeat){
-    const sequencerColumn = sequencerPattern[currentBeat];
+  function playSequencerColumn(patternId, currentBeat){
+    const sequencerPattern    = sequencerData[patternId];
+    const patternSamples      = sequencerSampleData[patternId];
+    const sequencerColumn     = sequencerPattern[currentBeat];
 
     function playSound(sample){
       sample.pause();
@@ -119,7 +120,8 @@ function loop(){
     }
 
     setTimeout(()=>{
-      for (let sampleId of sequencerColumn) {
+      for (let row of sequencerColumn) {
+        let sampleId = patternSamples[row];
         playSound(samples[sampleId]);
       }
 
