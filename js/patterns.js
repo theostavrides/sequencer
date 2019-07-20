@@ -10,7 +10,7 @@ function addPatternClickEvents(){
       togglePatternOnOffState(index);
     } else {
       console.log(patternBox.parentNode.children)
-      for (let i = 0; i < 10; i++) { patternBox.parentNode.children.item(i).classList.remove('selected') }
+      Array.from(patternBox.parentNode.children).forEach(i => i.classList.remove('selected'));
       patternBox.classList.add('selected');
 
       const oldPatternView = currentPatternView;
@@ -27,12 +27,14 @@ function renderPattern(oldPatternNum, newPatternNum){
   let newPattern  = sequencerData[newPatternNum];
   for (let column = 0; column < 16; column++) {
     prevPattern[column].forEach(e => {
-      sequencerButtons.item((column) + (e * 16)).classList.remove('on')
-      sequencerButtons.item((column) + (e * 16)).classList.add('off')
+      let classes = sequencerButtons.item(column + e * 16).classList;
+      classes.remove('on');
+      classes.add('off');
     })
     newPattern[column].forEach(e => {
-      sequencerButtons.item((column) + (e * 16)).classList.remove('off')
-      sequencerButtons.item((column) + (e * 16)).classList.add('on')
+      let classes = sequencerButtons.item(column + e * 16).classList;
+      classes.remove('off');
+      classes.add('on');
     })
   }
 }
