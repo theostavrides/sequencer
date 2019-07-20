@@ -2,7 +2,11 @@ function addPatternClickEvents(){
   const patternsBox = document.getElementById('patterns');
   patternsBox.addEventListener('click', handlePatternClick);
   function handlePatternClick(e){
-    const patternBox = e.target.parentNode;
+    let patternBox;
+    e.target.classList.contains('patternBox') ?
+      patternBox = e.target :
+      patternBox = e.target.parentNode;
+
     let index = Array.from(patternBox.parentNode.children).indexOf(patternBox) + 1;
     if (index === 10) index = 0;
 
@@ -18,7 +22,6 @@ function addPatternClickEvents(){
         patternBoxClasses.remove('playing') :
         patternBoxClasses.add('playing')
 
-
       togglePatternOnOffState(index);
     } else {
       Array.from(patternBox.parentNode.children).forEach(i => i.classList.remove('selected'));
@@ -31,8 +34,16 @@ function addPatternClickEvents(){
   }
 }
 
+function addKeyBoardShortcuts(){
+
+}
+
 function renderPattern(oldPatternNum, newPatternNum){
-  let newData = sequencerData[newPatternNum];
+  renderSequencer(oldPatternNum, newPatternNum);
+  renderPiano(oldPatternNum, newPatternNum);
+}
+
+function renderSequencer(oldPatternNum, newPatternNum){
   let sequencerButtons = document.getElementsByClassName('sequencerButton');
   let prevPattern = sequencerData[oldPatternNum];
   let newPattern  = sequencerData[newPatternNum];
@@ -50,6 +61,23 @@ function renderPattern(oldPatternNum, newPatternNum){
   }
 }
 
+function renderSequencer(oldPatternNum, newPatternNum){
+  let noteButtons = document.getElementsByClassName('noteButton');
+  let prevPattern = pianoData[oldPatternNum];
+  let newPattern  = pianoData[newPatternNum];
+  for (let column = 0; column < 16; column++) {
+    prevPattern[column].forEach(e => {
+      let classes = noteButtons.item(column + e * 16).classList;
+      classes.remove('on');
+      classes.add('off');
+    })
+    newPattern[column].forEach(e => {
+      let classes = noteButtons.item(column + e * 16).classList;
+      classes.remove('off');
+      classes.add('on');
+    })
+  }
+}
 
 function togglePatternOnOffState(patternNum){
   patternOnOffState[patternNum] === 0 ?
@@ -58,3 +86,4 @@ function togglePatternOnOffState(patternNum){
 }
 
 addPatternClickEvents();
+addKeyBoardShortcuts();

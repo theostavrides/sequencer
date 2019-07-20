@@ -48,7 +48,7 @@ nav h1 {
 }
 
 .patternBox.selected {
-  border: 2px solid blue;
+  border: 2px solid aliceblue;
 }
 
 .patternBox.playing {
@@ -57,7 +57,7 @@ nav h1 {
 }
 
 .patternBox.selected.playing {
-  border: 2px solid blue;
+  border: 2px solid aliceblue;
 }
 
 .patternBox.playing div.patternLight {
@@ -102,5 +102,6 @@ nav h1 {
   border-radius: 1px;
   background-color: red;
   box-shadow: 0.5px 0px 2px red, -0.5px 0px 2px red;
+  pointer-events: none;
 }
 
