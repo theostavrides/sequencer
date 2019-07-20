@@ -35,7 +35,22 @@ function addPatternClickEvents(){
 }
 
 function addKeyBoardShortcuts(){
+  const patternsBox = document.getElementById('patterns');
+  console.log(patternsBox);
+  document.addEventListener('keydown', logKey);
 
+  function logKey(e){
+    let key = parseInt(e.key);
+    if (typeof key == 'number' && key < 10 && key >= 0){
+      let patterns = document.getElementById('patterns').children;
+      Array.from(patterns).forEach(i => i.classList.remove('selected'))
+      key === 0 ?
+        patterns[9].classList.add('selected') :
+        patterns[key - 1].classList.add('selected');
+      renderPattern(currentPatternView, key);
+      currentPatternView = key;
+    }
+  }
 }
 
 function renderPattern(oldPatternNum, newPatternNum){
@@ -61,7 +76,7 @@ function renderSequencer(oldPatternNum, newPatternNum){
   }
 }
 
-function renderSequencer(oldPatternNum, newPatternNum){
+function renderPiano(oldPatternNum, newPatternNum){
   let noteButtons = document.getElementsByClassName('noteButton');
   let prevPattern = pianoData[oldPatternNum];
   let newPattern  = pianoData[newPatternNum];
