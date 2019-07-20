@@ -47,6 +47,10 @@ nav h1 {
   border: 1px solid orangered;
 }
 
+.patternBox.selected {
+  border: 1px solid azure;
+}
+
 .patternBox p {
   font-family: sans-serif;
   font-size: 11px;
