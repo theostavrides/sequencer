@@ -10,7 +10,18 @@ let s3 = new Audio('808/hhato.mp3');
 let s4 = new Audio('808/clap.mp3');
 let s5 = new Audio('808/maraca.wav');
 
-let samples = [s0,s1,s2,s3,s4,s5];
+let s6 = new Audio('blackwater/kick1.wav');
+let s7 = new Audio('blackwater/kick2.wav');
+let s8 = new Audio('blackwater/kick3.wav');
+let s9 = new Audio('blackwater/piano.wav');
+let s10 = new Audio('blackwater/snare.wav');
+let s11 = new Audio('blackwater/snare2.wav');
+let s12 = new Audio('blackwater/crash.wav');
+let s13 = new Audio('blackwater/hhc.wav');
+let s14 = new Audio('blackwater/hho.wav');
+
+
+let samples = [s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14];
 
 var reverb = new Tone.JCReverb(0.7).connect(Tone.Master);
 var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
@@ -40,8 +51,8 @@ let sequencerData = [
 
 let sequencerSampleData = [
   [0,1,2,3,4,5],
-  [0,1,2,3,4,5],
-  [0,1,2,3,4,5],
+  [6,7,8,9,10,11],
+  [12,13,14,3,4,5],
   [0,1,2,3,4,5],
   [0,1,2,3,4,5],
   [0,1,2,3,4,5],
