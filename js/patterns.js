@@ -7,9 +7,20 @@ function addPatternClickEvents(){
     if (index === 10) index = 0;
 
     if (e.target.tagName === 'IMG') {
+      //switch image
+      e.target.src.split('/').pop() === 'greenplay.png' ?
+        e.target.src = 'images/stop.png' :
+        e.target.src = 'images/greenplay.png';
+
+      //switch pattern box-shaddow color
+      let patternBoxClasses = e.target.parentNode.classList;
+      patternBoxClasses.contains('playing') ?
+        patternBoxClasses.remove('playing') :
+        patternBoxClasses.add('playing')
+
+
       togglePatternOnOffState(index);
     } else {
-      console.log(patternBox.parentNode.children)
       Array.from(patternBox.parentNode.children).forEach(i => i.classList.remove('selected'));
       patternBox.classList.add('selected');
 

@@ -48,7 +48,21 @@ nav h1 {
 }
 
 .patternBox.selected {
-  border: 1px solid azure;
+  border: 2px solid blue;
+}
+
+.patternBox.playing {
+  border: 1px solid #33FF33;
+  box-shadow: -1px 1px 4px #33FF33, 1px 1px 4px #33FF33, -0px -0.5px 4px #33FF33;
+}
+
+.patternBox.selected.playing {
+  border: 2px solid blue;
+}
+
+.patternBox.playing div.patternLight {
+  background-color: #33FF33;
+  box-shadow: 0.5px 0px 2px #33FF33, -0.5px 0px 2px #33FF33;
 }
 
 .patternBox p {
