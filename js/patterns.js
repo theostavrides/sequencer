@@ -35,27 +35,51 @@ function addPatternClickEvents(){
 }
 
 function addKeyBoardShortcuts(){
-  const patternsBox = document.getElementById('patterns');
-  console.log(patternsBox);
-  document.addEventListener('keydown', logKey);
+  const patterns = Array.from(document.getElementById('patterns').children);
+  document.addEventListener('keydown', numberEvents);
 
-  function logKey(e){
+  function numberEvents(e){
     let key = parseInt(e.key);
-    if (typeof key == 'number' && key < 10 && key >= 0){
-      let patterns = document.getElementById('patterns').children;
-      Array.from(patterns).forEach(i => i.classList.remove('selected'))
-      key === 0 ?
-        patterns[9].classList.add('selected') :
-        patterns[key - 1].classList.add('selected');
+    let patternIndex = key === 0 ? 9 : key - 1;
+    if (!(typeof key == 'number' && key < 10 && key >= 0)) return;
+
+    if (e.ctrlKey === true) {
+      changeSelectedPattern(currentPatternView, key)
       renderPattern(currentPatternView, key);
-      currentPatternView = key;
+    } else {
+      togglePatternOnOffState(key);
+      togglePatternOnOffView(patterns[patternIndex])
     }
+
   }
+}
+
+function togglePatternOnOffView(node){
+  let image = node.children[1];
+  image.src.split('/').pop() === 'greenplay.png' ?
+    image.src = 'images/stop.png' :
+    image.src = 'images/greenplay.png';
+
+  //switch pattern box-shaddow color
+  let patternBoxClasses = node.classList;
+  patternBoxClasses.contains('playing') ?
+    patternBoxClasses.remove('playing') :
+    patternBoxClasses.add('playing')
+}
+
+function changeSelectedPattern(oldPatternNum, newPatternNum) {
+  let patterns = document.getElementById('patterns').children;
+  Array.from(patterns).forEach(i => i.classList.remove('selected'))
+  newPatternNum === 0 ?
+    patterns[9].classList.add('selected') :
+    patterns[newPatternNum - 1].classList.add('selected');
+
 }
 
 function renderPattern(oldPatternNum, newPatternNum){
   renderSequencer(oldPatternNum, newPatternNum);
   renderPiano(oldPatternNum, newPatternNum);
+  currentPatternView = newPatternNum;
 }
 
 function renderSequencer(oldPatternNum, newPatternNum){
