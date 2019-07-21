@@ -58,7 +58,6 @@ function createOptionsPanel(parent){
       grid.appendChild(div);
     }
 
-    let initial_samples = ['808 - kick','808 - snare','808 - hhatc','808 - hhato','808 - clap','808 - maraca'];
     //add rows
     for (let i = 0; i < 6; i++) {
       const rowNumber = document.createElement('div');
@@ -69,21 +68,18 @@ function createOptionsPanel(parent){
       sample.classList.add('sample');
       const sampleDropdown = document.createElement('div');
       sampleDropdown.classList.add('sampleDropdown');
-      sampleDropdown.innerHTML = initial_samples[i];
       sample.appendChild(sampleDropdown);
 
       const volume = document.createElement('div');
       volume.classList.add('volume');
       const volbox = document.createElement('div');
       volbox.classList.add('volbox');
-      volbox.innerHTML = 80;
       volume.appendChild(volbox);
 
 
       const pan = document.createElement('div');
       pan.classList.add('pan');
       const panbox = document.createElement('div');
-      panbox.innerHTML = 50;
       panbox.classList.add('panbox');
       pan.appendChild(panbox);
 
@@ -91,6 +87,7 @@ function createOptionsPanel(parent){
       grid.appendChild(sample);
       grid.appendChild(volume);
       grid.appendChild(pan);
+
     }
 
 
@@ -98,17 +95,36 @@ function createOptionsPanel(parent){
   }
 
   initialize();
+  renderOptionsData(1);
 }
 
-function renderOptionsData(oldPatternNum, newPatternNum){
-  let sampleBoxes = document.getElementsByClassName('sample');
+function renderOptionsData(newPatternNum){
+  let sampleDropdowns = document.getElementsByClassName('sampleDropdown');
+  let volBoxes = document.getElementsByClassName('volbox');
+  let panBoxes = document.getElementsByClassName('panbox');
   let tabToRender = optionsSelectedState[newPatternNum]; //if we should render the sequencer or snyth options tab
   let samplesToRender = sequencerSampleData[newPatternNum];
 
   for (let i = 0; i < 6; i++) {
     let sampleId = samplesToRender[i];
+    let sample = samples[sampleId];
+    let sampleDropdown = sampleDropdowns[i];
+    renderSampleName(sampleDropdown, sample.kit, sample.name)
+    renderVolume(i, sample.volume);
+    renderPan(i, sample.volume);
   }
-  for (e of samplesToRender) {
-    console.log(samples[e]);
+
+  function renderSampleName(node, kitname, sampleName) {
+    node.innerHTML = kitname + ' - ' + sampleName;
   }
+
+  function renderVolume(index, volumeVal){
+    volBoxes[index].innerHTML = volumeVal;
+  }
+
+  function renderPan(index, panVal){
+    panBoxes[index].innerHTML = panVal;
+
+  }
+
 }
