@@ -43,6 +43,9 @@ let currentPatternView = 1; // this is the pattern that the user is currently vi
 
 let patternOnOffState = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]; // which patterns are on or off
 
+let optionsSelectedState = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //shows if sequencer or synth options tab is selected
+
+
 let sequencerData = [
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
@@ -162,7 +165,7 @@ function loop(){
   setInterval(nextTick, 250);
 }
 
-function attachInstruments(){
+function init(){
   let instrumentDiv = document.getElementById('instruments');
   let col1 = document.getElementById('column1');
   let col2 = document.getElementById('column2');
@@ -171,10 +174,13 @@ function attachInstruments(){
   createPiano(col2);
   instrumentDiv.appendChild(col1);
   instrumentDiv.appendChild(col2);
+
+  addPatternClickEvents();
+  addKeyBoardShortcuts();
 }
 
 
-attachInstruments();
+init();
 
 let playButton = document.getElementById('play')
 playButton.addEventListener('click', (e)=>{

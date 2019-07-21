@@ -48,9 +48,8 @@ function addKeyBoardShortcuts(){
       renderPattern(currentPatternView, key);
     } else {
       togglePatternOnOffState(key);
-      togglePatternOnOffView(patterns[patternIndex])
+      togglePatternOnOffView(patterns[patternIndex]);
     }
-
   }
 }
 
@@ -77,13 +76,13 @@ function changeSelectedPattern(oldPatternNum, newPatternNum) {
 }
 
 function renderPattern(oldPatternNum, newPatternNum){
-  renderSequencer(oldPatternNum, newPatternNum);
-  renderPiano(oldPatternNum, newPatternNum);
-  renderSequencerOptions(oldPatternNum, newPatternNum);
+  renderSequencerData(oldPatternNum, newPatternNum);
+  renderPianoData(oldPatternNum, newPatternNum);
+  renderOptionsData(oldPatternNum, newPatternNum);
   currentPatternView = newPatternNum;
 }
 
-function renderSequencer(oldPatternNum, newPatternNum){
+function renderSequencerData(oldPatternNum, newPatternNum){
   let sequencerButtons = document.getElementsByClassName('sequencerButton');
   let prevPattern = sequencerData[oldPatternNum];
   let newPattern  = sequencerData[newPatternNum];
@@ -101,7 +100,7 @@ function renderSequencer(oldPatternNum, newPatternNum){
   }
 }
 
-function renderPiano(oldPatternNum, newPatternNum){
+function renderPianoData(oldPatternNum, newPatternNum){
   let noteButtons = document.getElementsByClassName('noteButton');
   let prevPattern = pianoData[oldPatternNum];
   let newPattern  = pianoData[newPatternNum];
@@ -125,9 +124,3 @@ function togglePatternOnOffState(patternNum){
     patternOnOffState[patternNum] = 0;
 }
 
-function renderSequencerOptions(oldPatternNum, newPatternNum){
-
-}
-
-addPatternClickEvents();
-addKeyBoardShortcuts();

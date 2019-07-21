@@ -99,3 +99,16 @@ function createOptionsPanel(parent){
 
   initialize();
 }
+
+function renderOptionsData(oldPatternNum, newPatternNum){
+  let sampleBoxes = document.getElementsByClassName('sample');
+  let tabToRender = optionsSelectedState[newPatternNum]; //if we should render the sequencer or snyth options tab
+  let samplesToRender = sequencerSampleData[newPatternNum];
+
+  for (let i = 0; i < 6; i++) {
+    let sampleId = samplesToRender[i];
+  }
+  for (e of samplesToRender) {
+    console.log(samples[e]);
+  }
+}
