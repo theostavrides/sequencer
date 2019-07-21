@@ -79,6 +79,7 @@ function changeSelectedPattern(oldPatternNum, newPatternNum) {
 function renderPattern(oldPatternNum, newPatternNum){
   renderSequencer(oldPatternNum, newPatternNum);
   renderPiano(oldPatternNum, newPatternNum);
+  renderSequencerOptions(oldPatternNum, newPatternNum);
   currentPatternView = newPatternNum;
 }
 
@@ -122,6 +123,10 @@ function togglePatternOnOffState(patternNum){
   patternOnOffState[patternNum] === 0 ?
     patternOnOffState[patternNum] = 1 :
     patternOnOffState[patternNum] = 0;
+}
+
+function renderSequencerOptions(oldPatternNum, newPatternNum){
+
 }
 
 addPatternClickEvents();

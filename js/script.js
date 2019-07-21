@@ -1,32 +1,39 @@
 //------------------ AUDIO ---------------------
 
-//808
+let samples = {
+  0: {kit: '808', name:'kick', sample: new Audio('808/kick.wav')},
+  1: {kit: '808', name:'snare', sample: new Audio('808/snare.mp3')},
+  2: {kit: '808', name:'hhatc', sample: new Audio('808/hhatc.mp3')},
+  3: {kit: '808', name:'hhato', sample: new Audio('808/hhato.mp3')},
+  4: {kit: '808', name:'clap', sample: new Audio('808/clap.mp3')},
+  5: {kit: '808', name:'maraca', sample: new Audio('808/maraca.wav')},
 
+  6: {kit: 'blackwater', name: 'kick1', sample: new Audio('blackwater/kick1.wav')},
+  7: {kit: 'blackwater', name: 'kick2', sample: new Audio('blackwater/kick2.wav')},
+  8: {kit: 'blackwater', name: 'kick3', sample: new Audio('blackwater/kick3.wav')},
+  9: {kit: 'blackwater', name: 'snare', sample: new Audio('blackwater/snare.wav')},
+  10: {kit: 'blackwater', name: 'snare2', sample: new Audio('blackwater/snare2.wav')},
+  11: {kit: 'blackwater', name: 'hhatc', sample: new Audio('blackwater/hhc.wav')},
+  12: {kit: 'blackwater', name: 'hhato', sample: new Audio('blackwater/hho.wav')},
+  13: {kit: 'blackwater', name: 'crash', sample: new Audio('blackwater/crash.wav')},
+  14: {kit: 'blackwater', name: 'piano', sample: new Audio('blackwater/piano.wav')},
 
-let s0 = new Audio('808/kick.wav');
-let s1 = new Audio('808/snare.mp3');
-let s2 = new Audio('808/hhatc.mp3');
-let s3 = new Audio('808/hhato.mp3');
-let s4 = new Audio('808/clap.mp3');
-let s5 = new Audio('808/maraca.wav');
+  15: {kit: 'shadows', name: 'kick', sample: new Audio('shadows/kick.wav')},
+  16: {kit: 'shadows', name: 'hhatc', sample: new Audio('shadows/hhc.wav')},
+  17: {kit: 'shadows', name: 'snare', sample: new Audio('shadows/snare1.wav')},
+  18: {kit: 'shadows', name: 'rim', sample: new Audio('shadows/rim.wav')},
+  19: {kit: 'shadows', name: 'clap', sample: new Audio('shadows/clap.wav')},
+  20: {kit: 'shadows', name: 'tom', sample: new Audio('shadows/tom.wav')},
+  21: {kit: 'shadows', name: 'conga1', sample: new Audio('shadows/conga1.wav')},
+  22: {kit: 'shadows', name: 'conga2', sample: new Audio('shadows/conga2.wav')},
+  23: {kit: 'shadows', name: 'conga3', sample: new Audio('shadows/conga3.wav')},
+}
 
-let s6 = new Audio('blackwater/kick1.wav');
-let s7 = new Audio('blackwater/kick2.wav');
-let s8 = new Audio('blackwater/kick3.wav');
-let s9 = new Audio('blackwater/piano.wav');
-let s10 = new Audio('blackwater/snare.wav');
-let s11 = new Audio('blackwater/snare2.wav');
-let s12 = new Audio('blackwater/crash.wav');
-let s13 = new Audio('blackwater/hhc.wav');
-let s14 = new Audio('blackwater/hho.wav');
-
-
-let samples = [s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14];
-
-var reverb = new Tone.JCReverb(0.7).connect(Tone.Master);
-var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
+var reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
+var feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
+var chorus = new Tone.Chorus(4, 2.5, 0.5);
 var vol = new Tone.Volume(-15).toMaster();
-let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, reverb, feedbackDelay);
+let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
 
 
 
@@ -51,8 +58,8 @@ let sequencerData = [
 
 let sequencerSampleData = [
   [0,1,2,3,4,5],
-  [6,7,8,9,10,11],
-  [12,13,14,3,4,5],
+  [15, 16,17,18,19,20],
+  [21,22,23,1,2,3],
   [0,1,2,3,4,5],
   [0,1,2,3,4,5],
   [0,1,2,3,4,5],
@@ -133,7 +140,7 @@ function loop(){
     setTimeout(()=>{
       for (let row of sequencerColumn) {
         let sampleId = patternSamples[row];
-        playSound(samples[sampleId]);
+        playSound(samples[sampleId].sample);
       }
 
     }, offset)
