@@ -88,17 +88,22 @@ function createSamplesMenu(parent){
 
       //for the close Menu button
       if (e.target.id === 'samplesMenuCloseBox') {
-        samplesMenu.classList.remove('show');
+        return samplesMenu.classList.remove('show');
+
       }
 
       //
-      let parent = e.target.parentNode
-      let grandParent = parent.parentNode
-      if (grandParent.classList.contains('folder')){
-        grandParent.classList.toggle('closed');
-        console.log(parent.nextSibling)
-        parent.nextSibling.classList.toggle('closed');
+
+      if (e.target.tagName === 'H2' || e.target.tagName === 'IMG') {
+        let parent = e.target.parentNode
+        let grandParent = parent.parentNode
+        if (grandParent.classList.contains('folder')){
+          grandParent.classList.toggle('closed');
+          parent.nextSibling.classList.toggle('closed');
+        }
+        return;
       }
+
     }
 
   }
