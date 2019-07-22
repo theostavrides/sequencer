@@ -48,6 +48,7 @@ function createSamplesMenu(parent){
   function createKitDiv(kit){
     const kitId     = 'folder' + kit;
     const kitDiv    = document.createElement('div');
+    const container = document.createElement('div');
     const arrow     = document.createElement('img');
     const kitName   = document.createElement('h2');
     const samples   = document.createElement('div');
@@ -58,8 +59,9 @@ function createSamplesMenu(parent){
     arrow.src = 'images/blackarrow.png';
     kitName.innerHTML = kit;
 
-    kitDiv.appendChild(arrow);
-    kitDiv.appendChild(kitName);
+    container.appendChild(arrow);
+    container.appendChild(kitName);
+    kitDiv.appendChild(container);
     kitDiv.appendChild(samples);
     return kitDiv;
   }

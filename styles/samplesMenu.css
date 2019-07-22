@@ -46,7 +46,7 @@
   display: inline-block;
   padding: 0;
   margin: 0;
-  width: 90%;
+  width: 89%;
 }
 
 .folder div {
@@ -60,12 +60,8 @@
   display: 0;
 }
 
-.folder > h2:hover{
-  background-color: darkgray;
-}
-
-.folder > h2:hover ~ img {
-  background-color: darkgray;
+.folder > div:nth-child(1):hover {
+  background-color: darkgray
 }
 
 .folder > div > div:hover{
