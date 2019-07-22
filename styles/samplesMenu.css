@@ -1,6 +1,6 @@
 #samplesMenu {
   position: absolute;
-  width: 200px;
+  width: 120px;
   top: 46px;
   bottom: 0px;
   left: 0;
@@ -11,9 +11,44 @@
   border-bottom: 1px solid white;
   z-index: 5;
   opacity: 0.98;
+  cursor: default;
+}
+
+#samplesMenu .folder .closed {
+  display: none;
 }
 
 #samplesMenu h1 {
-  font-family: 'Inconsolata', monospace;
-  font-size: 18px;
+  font-family: sans-serif;
+  font-size: 16px;
+  border-bottom: 1px solid black;
+  padding-bottom: 3px;
+  color: darkslateblue;
 }
+
+.folder img {
+  height: 8px;
+  width: 8px;
+  padding-right: 4px;
+}
+
+.folder h2 {
+  font-size: 13px;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 90%;
+}
+
+.folder div {
+  padding-left: 5px;
+}
+
+.folder div p {
+  font-size: 13px;
+  display: inline-block;
+  margin: 0;
+  display: 0;
+}
+
+.folder

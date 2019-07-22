@@ -42,39 +42,35 @@ function createSamplesMenu(parent){
       for (node of kitDivs) {
         parent.appendChild(node)
       }
-      console.log(kitNames)
-
     }
   }
 
   function createKitDiv(kit){
     const kitId     = 'folder' + kit;
     const kitDiv    = document.createElement('div');
-    const arrowDown = document.createElement('img');
-    const arrowSide = document.createElement('img');
-    const icon      = document.createElement('img');
+    const arrow     = document.createElement('img');
     const kitName   = document.createElement('h2');
     const samples   = document.createElement('div');
 
     kitDiv.id = kitId
     kitDiv.classList.add('closed');
+    kitDiv.classList.add('folder');
+    arrow.src = 'images/blackarrow.png';
     kitName.innerHTML = kit;
 
-    kitDiv.appendChild(arrowDown);
-    kitDiv.appendChild(arrowSide);
-    kitDiv.appendChild(icon);
+    kitDiv.appendChild(arrow);
     kitDiv.appendChild(kitName);
     kitDiv.appendChild(samples);
-
     return kitDiv;
   }
 
   function createSampleDiv(name){
     const sampleDiv  = document.createElement('div');
-    const icon       = document.createElement('img');
+    // const icon       = document.createElement('img');
     const sampleName = document.createElement('p');
-    sampleName.innerHTML = name;
-    sampleDiv.appendChild(icon);
+
+    sampleName.innerHTML = '&#x25CF ' + name;
+    // sampleDiv.appendChild(icon);
     sampleDiv.appendChild(sampleName);
     return sampleDiv;
   }
