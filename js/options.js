@@ -74,6 +74,7 @@ function createOptionsPanel(parent){
       sample.classList.add('sample');
       const sampleDropdown = document.createElement('div');
       sampleDropdown.classList.add('sampleDropdown');
+      sampleDropdown.setAttribute('row', i);
       sample.appendChild(sampleDropdown);
 
       const volume = document.createElement('div');
@@ -110,6 +111,36 @@ function createOptionsPanel(parent){
   //                 EVENT LISTENERS
 
   function addEventListeners(){
+    addTabClickListener();
+    addOptionsGridListener();
+
+    // Sample dropdown menu click events
+  }
+
+  function addOptionsGridListener(){
+    let grid         = document.getElementById('sequencerOptionsGrid');
+    grid.addEventListener('click', gridClick)
+    function gridClick(e){
+      if (e.target.classList.contains('sampleDropdown')){
+        sampleClick(e);
+      }
+    }
+    function sampleClick(e){
+      document.getElementById('samplesMenu').classList.add('show')
+      let row = e.target.getAttribute('row');
+      currentPatternView;
+      sequencerSampleData;
+    }
+    function volClick(e){
+
+    }
+    function panClick(e){
+
+    }
+
+  }
+
+  function addTabClickListener(){
     const tabs = document.getElementById('tabs');
     const tab1 = document.getElementById('tab1');
     const tab2 = document.getElementById('tab2');
@@ -143,8 +174,6 @@ function createOptionsPanel(parent){
       sequencerOptions.classList.toggle('hide');
       synthesizerOptions.classList.toggle('hide');
     }
-
-    // Sample dropdown menu click events
   }
 
   initialize();

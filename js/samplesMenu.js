@@ -2,9 +2,14 @@ function createSamplesMenu(parent){
   function initialize(){
     const samplesMenu = createSamplesMenuDiv();
     const title       = createTitle();
+    const closeBox  = document.createElement('img');
+    closeBox.src = 'images/close.png';
+    closeBox.id  = 'samplesMenuCloseBox';
     samplesMenu.appendChild(title);
+    samplesMenu.appendChild(closeBox);
     renderSamples(samplesMenu);
     parent.appendChild(samplesMenu);
+    addClickListeners(samplesMenu);
   }
 
   function createSamplesMenuDiv(){
@@ -45,6 +50,7 @@ function createSamplesMenu(parent){
     }
   }
 
+
   function createKitDiv(kit){
     const kitId     = 'folder' + kit;
     const kitDiv    = document.createElement('div');
@@ -58,7 +64,7 @@ function createSamplesMenu(parent){
     kitDiv.classList.add('folder');
     arrow.src = 'images/blackarrow.png';
     kitName.innerHTML = kit;
-
+    samples.classList.add('closed')
     container.appendChild(arrow);
     container.appendChild(kitName);
     kitDiv.appendChild(container);
@@ -68,15 +74,34 @@ function createSamplesMenu(parent){
 
   function createSampleDiv(name){
     const sampleDiv  = document.createElement('div');
-    // const icon       = document.createElement('img');
     const sampleName = document.createElement('p');
 
     sampleName.innerHTML = '&#x25CF ' + name;
-    // sampleDiv.appendChild(icon);
     sampleDiv.appendChild(sampleName);
     return sampleDiv;
   }
 
+  //              EVENT LISTENERS
+  function addClickListeners(samplesMenu){
+    samplesMenu.addEventListener('click', handleClick)
+    function handleClick(e){
+
+      //for the close Menu button
+      if (e.target.id === 'samplesMenuCloseBox') {
+        samplesMenu.classList.remove('show');
+      }
+
+      //
+      let parent = e.target.parentNode
+      let grandParent = parent.parentNode
+      if (grandParent.classList.contains('folder')){
+        grandParent.classList.toggle('closed');
+        console.log(parent.nextSibling)
+        parent.nextSibling.classList.toggle('closed');
+      }
+    }
+
+  }
   initialize();
 }
 
