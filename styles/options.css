@@ -29,13 +29,17 @@
 
 #tab1 {
   position: relative;
-  z-index: 3;
 }
 
 #tab2 {
   position: relative;
   z-index: 1;
 }
+
+#tab1.active, #tab2.active {
+  z-index: 3;
+}
+
 .tab {
   width: 20%;
   margin-left: 10px;
@@ -57,12 +61,16 @@
 
 /* Sequencer Options */
 
-#sequencerOptions {
+#sequencerOptions, #synthesizerOptions {
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#sequencerOptions.hide, #synthesizerOptions.hide {
+  display: none;
 }
 
 #sequencerOptionsGrid {
@@ -107,4 +115,5 @@
 }
 
 
+/* Synthesizer Options*/
 

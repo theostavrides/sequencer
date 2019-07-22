@@ -4,10 +4,13 @@ function createOptionsPanel(parent){
     const tabs       = createTabs();
     const optionsBox = createOptionsBox();
     const sequencerOptions = createSequencerOptions();
+    const synthesizerOptions = createSynthesizerOptions();
     optionsBox.appendChild(sequencerOptions);
+    optionsBox.appendChild(synthesizerOptions);
     options.appendChild(tabs);
     options.appendChild(optionsBox);
     parent.appendChild(options);
+    addEventListeners();
   }
 
   function createOptions(){
@@ -27,8 +30,9 @@ function createOptionsPanel(parent){
     tabs.id = 'tabs';
     tab1.id = 'tab1';
     tab2.id = 'tab2';
-    tab1.classList.add('tab')
-    tab2.classList.add('tab')
+    tab1.classList.add('tab');
+    tab1.classList.add('active');
+    tab2.classList.add('tab');
     tab1.appendChild(text1);
     tab2.appendChild(text2);
     tabs.appendChild(tab1);
@@ -41,6 +45,8 @@ function createOptionsPanel(parent){
     optionsBox.id = 'optionsBox';
     return optionsBox;
   }
+
+  //                    SEQUENCER OPTIONS
 
   function createSequencerOptions(){
     let sequencerOptions = document.createElement('div');
@@ -89,9 +95,53 @@ function createOptionsPanel(parent){
       grid.appendChild(pan);
 
     }
-
-
     return sequencerOptions;
+  }
+
+  //                  SYNTHESIZER OPTIONS
+
+  function createSynthesizerOptions(){
+    const synthesizerOptions = document.createElement('div');
+    synthesizerOptions.id = 'synthesizerOptions';
+    synthesizerOptions.classList.add('hide');
+    return synthesizerOptions;
+  }
+
+  //                 EVENT LISTENERS
+
+  function addEventListeners(){
+    const tabs = document.getElementById('tabs');
+    const tab1 = document.getElementById('tab1');
+    const tab2 = document.getElementById('tab2');
+    tabs.addEventListener('click', toggleOptionsView);
+
+    function identifyTab(e) {
+      if (e.target.classList.contains('tab')){
+        return e.target;
+      } else if (e.target.parentNode.classList.contains('tab')) {
+        return e.target.parentNode;
+      } else {
+        return null;
+      }
+    }
+
+    function toggleOptionsView(e){
+      let tab = identifyTab(e);
+      if (!tab) return;
+      const sequencerOptions = document.getElementById('sequencerOptions');
+      const synthesizerOptions = document.getElementById('synthesizerOptions');
+      if ((tab.id === 'tab1' && sequencerOptions.classList.contains('hide')) ||
+          (tab.id === 'tab2' && synthesizerOptions.classList.contains('hide'))){
+        toggleClasses();
+      }
+    }
+
+    function toggleClasses(){
+      tab1.classList.toggle('active');
+      tab2.classList.toggle('active');
+      sequencerOptions.classList.toggle('hide');
+      synthesizerOptions.classList.toggle('hide');
+    }
   }
 
   initialize();
@@ -102,7 +152,7 @@ function renderOptionsData(newPatternNum){
   let sampleDropdowns = document.getElementsByClassName('sampleDropdown');
   let volBoxes = document.getElementsByClassName('volbox');
   let panBoxes = document.getElementsByClassName('panbox');
-  let tabToRender = optionsSelectedState[newPatternNum]; //if we should render the sequencer or snyth options tab
+  let tabToRender = activeTabState[newPatternNum];
   let samplesToRender = sequencerSampleData[newPatternNum];
 
   for (let i = 0; i < 6; i++) {
@@ -126,5 +176,5 @@ function renderOptionsData(newPatternNum){
     panBoxes[index].innerHTML = panVal;
 
   }
-
 }
+
