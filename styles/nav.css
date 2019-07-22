@@ -43,21 +43,21 @@ nav h1 {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 60% 40%;
-  box-shadow: -1px 1px 4px red, 1px 1px 4px red, -0px -0.5px 4px red;
-  border: 1px solid orangered;
+  /*box-shadow: -1px 1px 4px red, 1px 1px 4px red, -0px -0.5px 4px red;*/
+  border: 3px groove gray;
 }
 
 .patternBox.selected {
-  border: 2px solid aliceblue;
+  border: 3px groove aliceblue;
 }
 
 .patternBox.playing {
-  border: 1px solid #33FF33;
-  box-shadow: -1px 1px 4px #33FF33, 1px 1px 4px #33FF33, -0px -0.5px 4px #33FF33;
+  /*border: 3px solid #33FF33;*/
+  /*box-shadow: -1px 1px 4px #33FF33, 1px 1px 4px #33FF33, -0px -0.5px 4px #33FF33;*/
 }
 
 .patternBox.selected.playing {
-  border: 2px solid aliceblue;
+  border: 3px groove aliceblue;
 }
 
 .patternBox.playing div.patternLight {
