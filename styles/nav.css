@@ -44,11 +44,11 @@ nav h1 {
   grid-template-columns: 50% 50%;
   grid-template-rows: 60% 40%;
   /*box-shadow: -1px 1px 4px red, 1px 1px 4px red, -0px -0.5px 4px red;*/
-  border: 3px groove gray;
+  border: 3px groove dimgray;
 }
 
 .patternBox.selected {
-  border: 3px groove aliceblue;
+  border: 3px groove mintcream;
 }
 
 .patternBox.playing {
@@ -57,7 +57,7 @@ nav h1 {
 }
 
 .patternBox.selected.playing {
-  border: 3px groove aliceblue;
+  border: 3px groove mintcream;
 }
 
 .patternBox.playing div.patternLight {
@@ -90,7 +90,7 @@ nav h1 {
   background-color: black;
   border-top: 1px solid tan;
   grid-column: 1 / span 2;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px 3px 3px;
   display: flex;
   justify-content: center;
   align-items: center;

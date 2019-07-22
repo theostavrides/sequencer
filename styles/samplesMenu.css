@@ -1,0 +1,19 @@
+#samplesMenu {
+  position: absolute;
+  width: 200px;
+  top: 46px;
+  bottom: 0px;
+  left: 0;
+  padding-left: 22px;
+  padding-right: 22px;
+  background-color:gray;
+  border: 1px solid white;
+  border-bottom: 1px solid white;
+  z-index: 5;
+  opacity: 0.98;
+}
+
+#samplesMenu h1 {
+  font-family: 'Inconsolata', monospace;
+  font-size: 18px;
+}

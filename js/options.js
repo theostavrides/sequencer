@@ -115,16 +115,7 @@ function createOptionsPanel(parent){
     const tab2 = document.getElementById('tab2');
     tabs.addEventListener('click', toggleOptionsView);
 
-    function identifyTab(e) {
-      if (e.target.classList.contains('tab')){
-        return e.target;
-      } else if (e.target.parentNode.classList.contains('tab')) {
-        return e.target.parentNode;
-      } else {
-        return null;
-      }
-    }
-
+    // Options tab click events
     function toggleOptionsView(e){
       let tab = identifyTab(e);
       if (!tab) return;
@@ -136,12 +127,24 @@ function createOptionsPanel(parent){
       }
     }
 
+    function identifyTab(e) {
+      if (e.target.classList.contains('tab')){
+        return e.target;
+      } else if (e.target.parentNode.classList.contains('tab')) {
+        return e.target.parentNode;
+      } else {
+        return null;
+      }
+    }
+
     function toggleClasses(){
       tab1.classList.toggle('active');
       tab2.classList.toggle('active');
       sequencerOptions.classList.toggle('hide');
       synthesizerOptions.classList.toggle('hide');
     }
+
+    // Sample dropdown menu click events
   }
 
   initialize();

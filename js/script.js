@@ -166,13 +166,14 @@ function loop(){
   setInterval(nextTick, 250);
 }
 
-function init(){
+function initialize(){
   let instrumentDiv = document.getElementById('instruments');
   let col1 = document.getElementById('column1');
   let col2 = document.getElementById('column2');
   createSequencer(col1);
   createOptionsPanel(col1);
   createPiano(col2);
+  createSamplesMenu(document.body);
   instrumentDiv.appendChild(col1);
   instrumentDiv.appendChild(col2);
 
@@ -181,11 +182,8 @@ function init(){
 }
 
 
-init();
+initialize();
 
 let playButton = document.getElementById('play')
-playButton.addEventListener('click', (e)=>{
-  loop();
-
-})
+playButton.addEventListener('click', e => loop())
 
