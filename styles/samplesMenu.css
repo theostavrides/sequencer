@@ -12,7 +12,16 @@
   z-index: 5;
   opacity: 0.98;
   cursor: default;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
 }
+
+#samplesMenu::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
 
 #samplesMenu .folder .closed {
   display: none;
@@ -51,4 +60,14 @@
   display: 0;
 }
 
-.folder
+.folder > h2:hover{
+  background-color: darkgray;
+}
+
+.folder > h2:hover ~ img {
+  background-color: darkgray;
+}
+
+.folder > div > div:hover{
+  background-color: darkgray;
+}

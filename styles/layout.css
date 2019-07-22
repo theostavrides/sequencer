@@ -1,7 +1,16 @@
 body {
   background-color: dimgray; /* mediumseagreen */
   margin: 0;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
 }
+
+body::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
 
 #instruments {
   height: 100%;
