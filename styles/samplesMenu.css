@@ -27,8 +27,8 @@
 
 /* slide in animation */
 #samplesMenu.show {
-  -webkit-animation: slide 1s forwards;
-  animation: slide 0.5s forwards;
+  -webkit-animation: slide 0.8s forwards;
+  animation: slide 0.8s forwards;
 }
 
 @-webkit-keyframes slide {

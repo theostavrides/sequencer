@@ -46,6 +46,7 @@ let patternOnOffState = [0, 1, 0, 0, 0, 0, 0, 0, 0, 0]; // which patterns are on
 
 let activeTabState = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //shows if sequencer or synth options tab is selected
 
+let selectedSampleDropDown = null;
 
 let sequencerData = [
   [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],

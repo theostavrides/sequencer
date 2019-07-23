@@ -104,6 +104,10 @@
   background-color: mediumaquamarine;
 }
 
+#sequencerOptionsGrid .sampleDropdown.selected {
+  background-color: mediumaquamarine;
+}
+
 .panbox {
   width: 30px;
   border: 1px solid dimgray;

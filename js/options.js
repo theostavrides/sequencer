@@ -118,22 +118,28 @@ function createOptionsPanel(parent){
   }
 
   function addOptionsGridListener(){
-    let grid         = document.getElementById('sequencerOptionsGrid');
+    let grid = document.getElementById('sequencerOptionsGrid');
     grid.addEventListener('click', gridClick)
+
     function gridClick(e){
       if (e.target.classList.contains('sampleDropdown')){
         sampleClick(e);
       }
     }
+
     function sampleClick(e){
-      document.getElementById('samplesMenu').classList.add('show')
       let row = e.target.getAttribute('row');
-      currentPatternView;
-      sequencerSampleData;
+      document.getElementById('samplesMenu').classList.add('show'); //show the samplesMenu
+      let allDropdowns = document.getElementsByClassName('sampleDropdown')
+      for (let node of allDropdowns) { node.classList.remove('selected') }
+      e.target.classList.add('selected') // add selected class to clicked sampleDropdown
+      selectedSampleDropDown = { pattern: currentPatternView, row }; //update Data
     }
+
     function volClick(e){
 
     }
+
     function panClick(e){
 
     }

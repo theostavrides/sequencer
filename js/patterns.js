@@ -30,6 +30,13 @@ function addPatternClickEvents(){
       const oldPatternView = currentPatternView;
       currentPatternView = index;
       renderPattern(oldPatternView, currentPatternView);
+
+      //remove selected class from sampleDropdown (if it exists)
+      let allDropdowns = document.getElementsByClassName('sampleDropdown')
+      for (let node of allDropdowns) { node.classList.remove('selected') }
+      selectedSampleDropDown = null;
+      //close menu
+      document.getElementById('samplesMenu').classList.remove('show');
     }
   }
 }

@@ -34,14 +34,14 @@ function createSamplesMenu(parent){
       const kitId = 'folder' + kit;
 
       if (!kitNames.includes(kitId)) {
-        const sampleDiv = createSampleDiv(name);
+        const sampleDiv = createSampleDiv(name, key);
         const kitDiv    = createKitDiv(kit);
         kitDiv.lastChild.appendChild(sampleDiv);
         kitDivs.push(kitDiv);
         kitNames.push(kitId);
       } else {
         const kitDiv    = kitDivs[kitNames.indexOf(kitId)];
-        const sampleDiv = createSampleDiv(name);
+        const sampleDiv = createSampleDiv(name, key);
         kitDiv.lastChild.appendChild(sampleDiv);
       }
       for (node of kitDivs) {
@@ -72,10 +72,11 @@ function createSamplesMenu(parent){
     return kitDiv;
   }
 
-  function createSampleDiv(name){
+  function createSampleDiv(name, key){
     const sampleDiv  = document.createElement('div');
     const sampleName = document.createElement('p');
-
+    sampleDiv.classList.add('menuSample')
+    sampleDiv.setAttribute('sampleId', key);
     sampleName.innerHTML = '&#x25CF ' + name;
     sampleDiv.appendChild(sampleName);
     return sampleDiv;
@@ -83,17 +84,21 @@ function createSamplesMenu(parent){
 
   //              EVENT LISTENERS
   function addClickListeners(samplesMenu){
-    samplesMenu.addEventListener('click', handleClick)
-    function handleClick(e){
+    samplesMenu.addEventListener('click', handleClick);
 
+    function handleClick(e){
       //for the close Menu button
       if (e.target.id === 'samplesMenuCloseBox') {
-        return samplesMenu.classList.remove('show');
 
+        //remove selected class from clicked sample Dropdown
+        let allDropdowns = document.getElementsByClassName('sampleDropdown')
+        for (let node of allDropdowns) { node.classList.remove('selected') }
+        selectedSampleDropDown = null;
+
+        return samplesMenu.classList.remove('show');  //close menu
       }
 
-      //
-
+      //toggle the kit samples list
       if (e.target.tagName === 'H2' || e.target.tagName === 'IMG') {
         let parent = e.target.parentNode
         let grandParent = parent.parentNode
@@ -102,6 +107,12 @@ function createSamplesMenu(parent){
           parent.nextSibling.classList.toggle('closed');
         }
         return;
+      }
+
+      //if a sample in the menu is clicked
+      if (e.target.classList.contains('menuSample') ||
+          e.target.parentNode.classList.contains('menuSample')) {
+        let sampleid = e.target.getAttribute('sampleid') || e.target.parentNode.getAttribute('sampleid');
       }
 
     }
