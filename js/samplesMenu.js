@@ -113,6 +113,9 @@ function createSamplesMenu(parent){
       if (e.target.classList.contains('menuSample') ||
           e.target.parentNode.classList.contains('menuSample')) {
         let sampleid = e.target.getAttribute('sampleid') || e.target.parentNode.getAttribute('sampleid');
+        //change sequencerSampleData
+        sequencerSampleData[selectedSampleDropDown.pattern][selectedSampleDropDown.row] = parseInt(sampleid)
+        renderOptions(currentPatternView);
       }
 
     }

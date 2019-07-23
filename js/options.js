@@ -133,7 +133,7 @@ function createOptionsPanel(parent){
       let allDropdowns = document.getElementsByClassName('sampleDropdown')
       for (let node of allDropdowns) { node.classList.remove('selected') }
       e.target.classList.add('selected') // add selected class to clicked sampleDropdown
-      selectedSampleDropDown = { pattern: currentPatternView, row }; //update Data
+      selectedSampleDropDown = { pattern: currentPatternView, row: parseInt(row) }; //update Data
     }
 
     function volClick(e){
@@ -183,10 +183,10 @@ function createOptionsPanel(parent){
   }
 
   initialize();
-  renderOptionsData(1);
+  renderOptions(1);
 }
 
-function renderOptionsData(newPatternNum){
+function renderOptions(newPatternNum){
   let sampleDropdowns = document.getElementsByClassName('sampleDropdown');
   let volBoxes = document.getElementsByClassName('volbox');
   let panBoxes = document.getElementsByClassName('panbox');

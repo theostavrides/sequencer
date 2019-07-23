@@ -85,7 +85,7 @@ function changeSelectedPattern(oldPatternNum, newPatternNum) {
 function renderPattern(oldPatternNum, newPatternNum){
   renderSequencerData(oldPatternNum, newPatternNum);
   renderPianoData(oldPatternNum, newPatternNum);
-  renderOptionsData(newPatternNum);
+  renderOptions(newPatternNum);
   currentPatternView = newPatternNum;
 }
 

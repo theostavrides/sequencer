@@ -38,7 +38,7 @@ let synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbac
 
 
 
-//-----------------  DATA ----------------------
+//-----------------  STATE ----------------------
 
 let currentPatternView = 1; // this is the pattern that the user is currently viewing.
 
