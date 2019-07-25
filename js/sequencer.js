@@ -87,3 +87,22 @@ function createSequencer(parent){
   }
   initialize();
 }
+
+function renderSequencerData(oldPatternNum, newPatternNum){
+  let sequencerButtons = document.getElementsByClassName('sequencerButton');
+  let prevPattern = sequencerData[oldPatternNum];
+  let newPattern  = sequencerData[newPatternNum];
+  for (let column = 0; column < 16; column++) {
+    prevPattern[column].forEach(e => {
+      let classes = sequencerButtons.item(column + e * 16).classList;
+      classes.remove('on');
+      classes.add('off');
+    })
+    newPattern[column].forEach(e => {
+      let classes = sequencerButtons.item(column + e * 16).classList;
+      classes.remove('off');
+      classes.add('on');
+    })
+  }
+}
+

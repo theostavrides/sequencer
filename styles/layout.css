@@ -1,4 +1,6 @@
 body {
+  background-image: url("../images/background/pink dust.png");
+  background-repeat: repeat;
   background-color: dimgray; /* mediumseagreen */
   margin: 0;
   overflow-y: scroll;

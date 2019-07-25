@@ -24,33 +24,6 @@ function createSamplesMenu(parent){
     return title;
   }
 
-  function renderSamples(parent) {
-    const kitDivs = [];
-    const kitNames = [];
-    for (let key in samples) {
-      const sample = samples[key];
-      const kit = sample.kit;
-      const name = sample.name;
-      const kitId = 'folder' + kit;
-
-      if (!kitNames.includes(kitId)) {
-        const sampleDiv = createSampleDiv(name, key);
-        const kitDiv    = createKitDiv(kit);
-        kitDiv.lastChild.appendChild(sampleDiv);
-        kitDivs.push(kitDiv);
-        kitNames.push(kitId);
-      } else {
-        const kitDiv    = kitDivs[kitNames.indexOf(kitId)];
-        const sampleDiv = createSampleDiv(name, key);
-        kitDiv.lastChild.appendChild(sampleDiv);
-      }
-      for (node of kitDivs) {
-        parent.appendChild(node)
-      }
-    }
-  }
-
-
   function createKitDiv(kit){
     const kitId     = 'folder' + kit;
     const kitDiv    = document.createElement('div');
@@ -82,7 +55,34 @@ function createSamplesMenu(parent){
     return sampleDiv;
   }
 
+  function renderSamples(parent) {
+    const kitDivs = [];
+    const kitNames = [];
+    for (let key in samples) {
+      const sample = samples[key];
+      const kit = sample.kit;
+      const name = sample.name;
+      const kitId = 'folder' + kit;
+
+      if (!kitNames.includes(kitId)) {
+        const sampleDiv = createSampleDiv(name, key);
+        const kitDiv    = createKitDiv(kit);
+        kitDiv.lastChild.appendChild(sampleDiv);
+        kitDivs.push(kitDiv);
+        kitNames.push(kitId);
+      } else {
+        const kitDiv    = kitDivs[kitNames.indexOf(kitId)];
+        const sampleDiv = createSampleDiv(name, key);
+        kitDiv.lastChild.appendChild(sampleDiv);
+      }
+      for (node of kitDivs) {
+        parent.appendChild(node)
+      }
+    }
+  }
+
   //              EVENT LISTENERS
+
   function addClickListeners(samplesMenu){
     samplesMenu.addEventListener('click', handleClick);
 

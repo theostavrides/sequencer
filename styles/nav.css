@@ -1,5 +1,7 @@
 nav {
   font-family: 'Inconsolata', monospace;
+  /*background-image: url("../images/background/random_grey_variations.png");
+  background-repeat: repeat;*/
   background-color: black;
   height: 44px;
   display: flex;

@@ -89,41 +89,6 @@ function renderPattern(oldPatternNum, newPatternNum){
   currentPatternView = newPatternNum;
 }
 
-function renderSequencerData(oldPatternNum, newPatternNum){
-  let sequencerButtons = document.getElementsByClassName('sequencerButton');
-  let prevPattern = sequencerData[oldPatternNum];
-  let newPattern  = sequencerData[newPatternNum];
-  for (let column = 0; column < 16; column++) {
-    prevPattern[column].forEach(e => {
-      let classes = sequencerButtons.item(column + e * 16).classList;
-      classes.remove('on');
-      classes.add('off');
-    })
-    newPattern[column].forEach(e => {
-      let classes = sequencerButtons.item(column + e * 16).classList;
-      classes.remove('off');
-      classes.add('on');
-    })
-  }
-}
-
-function renderPianoData(oldPatternNum, newPatternNum){
-  let noteButtons = document.getElementsByClassName('noteButton');
-  let prevPattern = pianoData[oldPatternNum];
-  let newPattern  = pianoData[newPatternNum];
-  for (let column = 0; column < 16; column++) {
-    prevPattern[column].forEach(e => {
-      let classes = noteButtons.item(column + e * 16).classList;
-      classes.remove('on');
-      classes.add('off');
-    })
-    newPattern[column].forEach(e => {
-      let classes = noteButtons.item(column + e * 16).classList;
-      classes.remove('off');
-      classes.add('on');
-    })
-  }
-}
 
 function togglePatternOnOffState(patternNum){
   patternOnOffState[patternNum] === 0 ?

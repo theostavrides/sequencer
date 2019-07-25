@@ -1,4 +1,6 @@
 .piano {
+  /*background-image: url("../images/background/ep_naturalwhite.png");
+  background-repeat: repeat;*/
   position: relative;
   display: flex;
   justify-content: center;

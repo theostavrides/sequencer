@@ -116,5 +116,22 @@ function createPiano(parent){
 
 
   initialize();
+}
 
+function renderPianoData(oldPatternNum, newPatternNum){
+  let noteButtons = document.getElementsByClassName('noteButton');
+  let prevPattern = pianoData[oldPatternNum];
+  let newPattern  = pianoData[newPatternNum];
+  for (let column = 0; column < 16; column++) {
+    prevPattern[column].forEach(e => {
+      let classes = noteButtons.item(column + e * 16).classList;
+      classes.remove('on');
+      classes.add('off');
+    })
+    newPattern[column].forEach(e => {
+      let classes = noteButtons.item(column + e * 16).classList;
+      classes.remove('off');
+      classes.add('on');
+    })
+  }
 }
