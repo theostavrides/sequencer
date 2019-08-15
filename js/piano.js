@@ -94,11 +94,11 @@ function createPiano(parent){
       let index        = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
       let columnNumber = index % 16;
       let rowNumber    = Math.floor(index / 16);
-      let dataIndex    = pianoData[currentPatternView][columnNumber].indexOf(rowNumber)
+      let dataIndex    = state.pianoData[state.currentPatternView][columnNumber].indexOf(rowNumber)
       if (dataIndex === -1){
-        pianoData[currentPatternView][columnNumber].push(rowNumber);
+        state.pianoData[state.currentPatternView][columnNumber].push(rowNumber);
       } else {
-        pianoData[currentPatternView][columnNumber] = pianoData[currentPatternView][columnNumber].filter(e => e !== rowNumber);
+        state.pianoData[state.currentPatternView][columnNumber] = state.pianoData[state.currentPatternView][columnNumber].filter(e => e !== rowNumber);
       }
     }
 
@@ -120,8 +120,8 @@ function createPiano(parent){
 
 function renderPianoData(oldPatternNum, newPatternNum){
   let noteButtons = document.getElementsByClassName('noteButton');
-  let prevPattern = pianoData[oldPatternNum];
-  let newPattern  = pianoData[newPatternNum];
+  let prevPattern = state.pianoData[oldPatternNum];
+  let newPattern  = state.pianoData[newPatternNum];
   for (let column = 0; column < 16; column++) {
     prevPattern[column].forEach(e => {
       let classes = noteButtons.item(column + e * 16).classList;

@@ -66,11 +66,11 @@ function createSequencer(parent){
       let index = Array.from(e.target.parentNode.children).indexOf(e.target); //get index of clicked button
       let columnNumber = index % 16;
       let rowNumber    = Math.floor(index / 16);
-      let dataIndex    = sequencerData[currentPatternView][columnNumber].indexOf(rowNumber)
+      let dataIndex    = state.sequencerData[state.currentPatternView][columnNumber].indexOf(rowNumber)
       if (dataIndex === -1){
-        sequencerData[currentPatternView][columnNumber].push(rowNumber);
+        state.sequencerData[state.currentPatternView][columnNumber].push(rowNumber);
       } else {
-        sequencerData[currentPatternView][columnNumber] = sequencerData[currentPatternView][columnNumber].filter(e => e !== rowNumber);
+        state.sequencerData[state.currentPatternView][columnNumber] = state.sequencerData[state.currentPatternView][columnNumber].filter(e => e !== rowNumber);
       }
     }
 
@@ -90,8 +90,8 @@ function createSequencer(parent){
 
 function renderSequencerData(oldPatternNum, newPatternNum){
   let sequencerButtons = document.getElementsByClassName('sequencerButton');
-  let prevPattern = sequencerData[oldPatternNum];
-  let newPattern  = sequencerData[newPatternNum];
+  let prevPattern = state.sequencerData[oldPatternNum];
+  let newPattern  = state.sequencerData[newPatternNum];
   for (let column = 0; column < 16; column++) {
     prevPattern[column].forEach(e => {
       let classes = sequencerButtons.item(column + e * 16).classList;

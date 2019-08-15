@@ -93,7 +93,7 @@ function createSamplesMenu(parent){
         //remove selected class from clicked sample Dropdown
         let allDropdowns = document.getElementsByClassName('sampleDropdown')
         for (let node of allDropdowns) { node.classList.remove('selected') }
-        selectedSampleDropDown = null;
+        state.selectedSampleDropDown = null;
 
         return samplesMenu.classList.remove('show');  //close menu
       }
@@ -113,9 +113,9 @@ function createSamplesMenu(parent){
       if (e.target.classList.contains('menuSample') ||
           e.target.parentNode.classList.contains('menuSample')) {
         let sampleid = e.target.getAttribute('sampleid') || e.target.parentNode.getAttribute('sampleid');
-        //change sequencerSampleData
-        sequencerSampleData[selectedSampleDropDown.pattern][selectedSampleDropDown.row] = parseInt(sampleid)
-        renderOptions(currentPatternView);
+        //change state.sequencerSampleData
+        state.sequencerSampleData[state.selectedSampleDropDown.pattern][state.selectedSampleDropDown.row] = parseInt(sampleid)
+        renderOptions(state.currentPatternView);
       }
 
     }

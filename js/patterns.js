@@ -27,14 +27,14 @@ function addPatternClickEvents(){
       Array.from(patternBox.parentNode.children).forEach(i => i.classList.remove('selected'));
       patternBox.classList.add('selected');
 
-      const oldPatternView = currentPatternView;
-      currentPatternView = index;
-      renderPattern(oldPatternView, currentPatternView);
+      const oldPatternView = state.currentPatternView;
+      state.currentPatternView = index;
+      renderPattern(oldPatternView, state.currentPatternView);
 
       //remove selected class from sampleDropdown (if it exists)
       let allDropdowns = document.getElementsByClassName('sampleDropdown')
       for (let node of allDropdowns) { node.classList.remove('selected') }
-      selectedSampleDropDown = null;
+      state.selectedSampleDropDown = null;
       //close menu
       document.getElementById('samplesMenu').classList.remove('show');
     }
@@ -51,8 +51,8 @@ function addKeyBoardShortcuts(){
     if (!(typeof key == 'number' && key < 10 && key >= 0)) return;
 
     if (e.ctrlKey === true) {
-      changeSelectedPattern(currentPatternView, key)
-      renderPattern(currentPatternView, key);
+      changeSelectedPattern(state.currentPatternView, key)
+      renderPattern(state.currentPatternView, key);
     } else {
       togglePatternOnOffState(key);
       togglePatternOnOffView(patterns[patternIndex]);
@@ -86,13 +86,13 @@ function renderPattern(oldPatternNum, newPatternNum){
   renderSequencerData(oldPatternNum, newPatternNum);
   renderPianoData(oldPatternNum, newPatternNum);
   renderOptions(newPatternNum);
-  currentPatternView = newPatternNum;
+  state.currentPatternView = newPatternNum;
 }
 
 
 function togglePatternOnOffState(patternNum){
-  patternOnOffState[patternNum] === 0 ?
-    patternOnOffState[patternNum] = 1 :
-    patternOnOffState[patternNum] = 0;
+  state.patternOnOffState[patternNum] === 0 ?
+    state.patternOnOffState[patternNum] = 1 :
+    state.patternOnOffState[patternNum] = 0;
 }
 
