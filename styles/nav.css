@@ -36,7 +36,7 @@ nav h1 {
   display: flex;
 }
 
-.patternBox {
+nav .patternBox {
   height: 20px;
   width: 8%;
   background-color: dimgray; /*darkorchid*/
@@ -49,25 +49,25 @@ nav h1 {
   border: 3px groove dimgray;
 }
 
-.patternBox.selected {
+nav .patternBox.selected {
   border: 3px groove mintcream;
 }
 
-.patternBox.playing {
+nav .patternBox.playing {
   /*border: 3px solid #33FF33;*/
   /*box-shadow: -1px 1px 4px #33FF33, 1px 1px 4px #33FF33, -0px -0.5px 4px #33FF33;*/
 }
 
-.patternBox.selected.playing {
+nav .patternBox.selected.playing {
   border: 3px groove mintcream;
 }
 
-.patternBox.playing div.patternLight {
+nav .patternBox.playing div.patternLight {
   background-color: #33FF33;
   box-shadow: 0.5px 0px 2px #33FF33, -0.5px 0px 2px #33FF33;
 }
 
-.patternBox p {
+nav .patternBox p {
   font-family: sans-serif;
   font-size: 11px;
   margin: 0;
@@ -80,7 +80,7 @@ nav h1 {
   cursor: default;
 }
 
-.patternBox img {
+nav .patternBox img {
   padding: 2px 8px 2px 8px;
   margin: 0;
   height: 8px;
@@ -88,7 +88,7 @@ nav h1 {
 }
 
 
-.patternLightBox {
+nav .patternLightBox {
   background-color: black;
   border-top: 1px solid tan;
   grid-column: 1 / span 2;
@@ -98,7 +98,7 @@ nav h1 {
   align-items: center;
 }
 
-.patternLight {
+nav .patternLight {
   width: 20px;
   height: 2px;
   border-radius: 1px;

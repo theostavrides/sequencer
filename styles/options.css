@@ -7,7 +7,7 @@
   margin-top: 19px;
 }
 
-#optionsBox {
+.options #optionsBox {
   width: 92%;
   margin-left: 4%;
   margin-right: 4%;
@@ -40,7 +40,7 @@
   z-index: 3;
 }
 
-.tab {
+.options .tab {
   width: 20%;
   margin-left: 10px;
   display: flex;
@@ -52,7 +52,7 @@
   cursor: default;
 }
 
-.tab p {
+.options .tab p {
   font-size: 12px;
   font-family: 'Inconsolata', monospace;
   margin-top: 0;
@@ -61,7 +61,7 @@
 
 /* Sequencer Options */
 
-#sequencerOptions, #synthesizerOptions {
+.options #sequencerOptions, #synthesizerOptions {
   height: 100%;
   width: 100%;
   display: flex;
@@ -108,16 +108,13 @@
   background-color: mediumaquamarine;
 }
 
-.panbox {
+.options .panbox {
   width: 30px;
   border: 1px solid dimgray;
 }
 
-.volbox {
+.options .volbox {
   width: 30px;
   border: 1px solid dimgray;
 }
-
-
-/* Synthesizer Options*/
 

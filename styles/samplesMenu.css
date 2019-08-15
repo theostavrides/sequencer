@@ -64,9 +64,7 @@
   background-color: darkgray;
 }
 
-
-
-.folder img {
+#samplesMenu .folder img {
   height: 8px;
   width: 8px;
   padding-right: 4px;
@@ -77,7 +75,7 @@
   transform: rotate(0deg);
 }
 
-.folder h2 {
+#samplesMenu .folder h2 {
   font-size: 13px;
   display: inline-block;
   padding: 0;
@@ -85,21 +83,21 @@
   width: 89%;
 }
 
-.folder div {
+#samplesMenu .folder div {
   padding-left: 5px;
 }
 
-.folder div p {
+#samplesMenu .folder div p {
   font-size: 13px;
   display: inline-block;
   margin: 0;
   display: 0;
 }
 
-.folder > div:nth-child(1):hover {
+#samplesMenu .folder > div:nth-child(1):hover {
   background-color: darkgray
 }
 
-.folder > div > div:hover{
+#samplesMenu .folder > div > div:hover{
   background-color: darkgray;
 }

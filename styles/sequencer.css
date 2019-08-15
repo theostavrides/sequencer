@@ -6,8 +6,8 @@
   box-shadow: -1px 2.5px 2px black, 1px 0.5px 2px black;
 }
 
-/*For the clickable buttons*/
-.buttonGrid {
+.sequencer .buttonGrid {
+  /*For the clickable buttons*/
   display: grid;
   width: 92%;
   height: 76%;
@@ -17,22 +17,22 @@
   grid-gap: 8px 8px;
 }
 
-.sequencerButton {
+.sequencer .sequencerButton {
   background-color: lightblue;
   box-shadow: -1px 2px 2px black, 0.5px 0.5px 2px black;
   border-radius: 2px;
 }
 
-.on {
+.sequencer .on {
   background-color: orange;
 }
 
-.off {
+.sequencer .off {
   background-color: lightblue;
 }
 
-/* for the lights that show current beat */
-.beatLightGrid {
+.sequencer .beatLightGrid {
+  /* for the lights that show current beat */
   display: grid;
   width: 92%;
   height: 2%;
@@ -42,12 +42,12 @@
   grid-gap: 8px 8px;
 }
 
-.beatLight {
+.sequencer .beatLight {
   background-color: azure;
   box-shadow: -1px 2px 2px black, 0.5px 0.5px 2px black;
   border-radius: 2px;
 }
 
-.beatLightOn {
+.sequencer .beatLightOn {
   background-color: #FE8326;
 }

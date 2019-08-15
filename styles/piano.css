@@ -13,13 +13,13 @@
   border-radius: 20px;
 }
 
-.keyboard {
+.piano .keyboard {
   position: relative;
   height: 100%;
   width: 7%;
 }
 
-.whiteKeysGrid {
+.piano .whiteKeysGrid {
   position: absolute;
   height: 100%;
   width: 43px;
@@ -32,13 +32,13 @@
   box-shadow: -1px 2.5px 2px gray, 1px 0.5px 2px gray;
 }
 
-.whiteKey {
+.piano .whiteKey {
   background-color: white;
   box-shadow: -1px 0px 1px white, -1px 0px 1px white;
   border-radius: 0px 3px 3px 0px;
 }
 
-.blackKeysGrid {
+.piano .blackKeysGrid {
   position: absolute;
   height: 100%;
   width: 42px;
@@ -49,7 +49,7 @@
   border-radius: 9px 0px 0px 9px;
 }
 
-.blackKey {
+.piano .blackKey {
   background-color: black;
   width: 70%;
   box-shadow: 0px 0.5px 1px black, 1px 0.5px 2px gray;
@@ -57,7 +57,7 @@
   padding-bottom: 2px;
 }
 
-.noteGrid {
+.piano .noteGrid {
   width: 90%;
   height: 100%;
   display: grid;
@@ -72,11 +72,11 @@
   box-shadow: -1px 0px 1px gray, 0.5px 0.5px 1px gray;
 }
 
-.noteButton {
+.piano .noteButton {
   background-color: lightsteelblue;
 }
 
-.noteButton.on {
+.piano .noteButton.on {
   background-color: lightslategray;
   border-radius: 2px;
   overflow: hidden;
