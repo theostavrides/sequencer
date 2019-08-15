@@ -164,7 +164,7 @@ function loop(){
 
   }
 
-  setInterval(nextTick, 250);
+  setInterval(nextTick, 100);
 }
 
 function initialize(){
