@@ -1,40 +1,70 @@
 //------------------ AUDIO ---------------------
 
-const samples = {
-  0: {kit: '808', name:'kick', sample: new Audio('samples/808/kick.wav'), volume: 50, pan: 50},
-  1: {kit: '808', name:'snare', sample: new Audio('samples/808/snare.mp3'), volume: 50, pan: 50},
-  2: {kit: '808', name:'hhatc', sample: new Audio('samples/808/hhatc.mp3'), volume: 50, pan: 50},
-  3: {kit: '808', name:'hhato', sample: new Audio('samples/808/hhato.mp3'), volume: 50, pan: 50},
-  4: {kit: '808', name:'clap', sample: new Audio('samples/808/clap.mp3'), volume: 50, pan: 50},
-  5: {kit: '808', name:'maraca', sample: new Audio('samples/808/maraca.wav'), volume: 50, pan: 50},
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-  6: {kit: 'blackwater', name: 'kick1', sample: new Audio('samples/blackwater/kick1.wav'), volume: 50, pan: 50},
-  7: {kit: 'blackwater', name: 'kick2', sample: new Audio('samples/blackwater/kick2.wav'), volume: 50, pan: 50},
-  8: {kit: 'blackwater', name: 'kick3', sample: new Audio('samples/blackwater/kick3.wav'), volume: 50, pan: 50},
-  9: {kit: 'blackwater', name: 'snare', sample: new Audio('samples/blackwater/snare.wav'), volume: 50, pan: 50},
-  10: {kit: 'blackwater', name: 'snare2', sample: new Audio('samples/blackwater/snare2.wav'), volume: 50, pan: 50},
-  11: {kit: 'blackwater', name: 'hhatc', sample: new Audio('samples/blackwater/hhc.wav'), volume: 50, pan: 50},
-  12: {kit: 'blackwater', name: 'hhato', sample: new Audio('samples/blackwater/hho.wav'), volume: 50, pan: 50},
-  13: {kit: 'blackwater', name: 'crash', sample: new Audio('samples/blackwater/crash.wav'), volume: 50, pan: 50},
-  14: {kit: 'blackwater', name: 'piano', sample: new Audio('samples/blackwater/piano.wav'), volume: 50, pan: 50},
+const samples = {};
 
-  15: {kit: 'shadows', name: 'kick', sample: new Audio('samples/shadows/kick.wav'), volume: 50, pan: 50},
-  16: {kit: 'shadows', name: 'hhatc', sample: new Audio('samples/shadows/hhc.wav'), volume: 50, pan: 50},
-  17: {kit: 'shadows', name: 'snare', sample: new Audio('samples/shadows/snare1.wav'), volume: 50, pan: 50},
-  18: {kit: 'shadows', name: 'rim', sample: new Audio('samples/shadows/rim.wav'), volume: 50, pan: 50},
-  19: {kit: 'shadows', name: 'clap', sample: new Audio('samples/shadows/clap.wav'), volume: 50, pan: 50},
-  20: {kit: 'shadows', name: 'tom', sample: new Audio('samples/shadows/tom.wav'), volume: 50, pan: 50},
-  21: {kit: 'shadows', name: 'conga1', sample: new Audio('samples/shadows/conga1.wav'), volume: 50, pan: 50},
-  22: {kit: 'shadows', name: 'conga2', sample: new Audio('samples/shadows/conga2.wav'), volume: 50, pan: 50},
-  23: {kit: 'shadows', name: 'conga3', sample: new Audio('samples/shadows/conga3.wav'), volume: 50, pan: 50},
+const sampleData = [
+  {kit: '808', name:'kick', path: 'samples/808/kick.wav'},
+  {kit: '808', name:'snare', path: 'samples/808/snare.mp3'},
+  {kit: '808', name:'hhatc', path: 'samples/808/hhatc.mp3'},
+  {kit: '808', name:'hhato', path: 'samples/808/hhato.mp3'},
+  {kit: '808', name:'clap', path: 'samples/808/clap.mp3'},
+  {kit: '808', name:'maraca', path: 'samples/808/maraca.wav'},
+
+  {kit: 'blackwater', name: 'kick1', path: 'samples/blackwater/kick1.wav'},
+  {kit: 'blackwater', name: 'kick2', path: 'samples/blackwater/kick2.wav'},
+  {kit: 'blackwater', name: 'kick3', path: 'samples/blackwater/kick3.wav'},
+  {kit: 'blackwater', name: 'snare', path: 'samples/blackwater/snare.wav'},
+  {kit: 'blackwater', name: 'snare2', path: 'samples/blackwater/snare2.wav'},
+  {kit: 'blackwater', name: 'hhatc', path: 'samples/blackwater/hhc.wav'},
+  {kit: 'blackwater', name: 'hhato', path: 'samples/blackwater/hho.wav'},
+  {kit: 'blackwater', name: 'crash', path: 'samples/blackwater/crash.wav'},
+  {kit: 'blackwater', name: 'piano', path: 'samples/blackwater/piano.wav'},
+
+  {kit: 'shadows', name: 'kick', path: 'samples/shadows/kick.wav'},
+  {kit: 'shadows', name: 'hhatc', path: 'samples/shadows/hhc.wav'},
+  {kit: 'shadows', name: 'snare', path: 'samples/shadows/snare1.wav'},
+  {kit: 'shadows', name: 'rim', path: 'samples/shadows/rim.wav'},
+  {kit: 'shadows', name: 'clap', path: 'samples/shadows/clap.wav'},
+  {kit: 'shadows', name: 'tom', path: 'samples/shadows/tom.wav'},
+  {kit: 'shadows', name: 'conga1', path: 'samples/shadows/conga1.wav'},
+  {kit: 'shadows', name: 'conga2', path: 'samples/shadows/conga2.wav'},
+  {kit: 'shadows', name: 'conga3', path: 'samples/shadows/conga3.wav'},
+];
+
+async function getFile(filepath) {
+  const response = await fetch(filepath);
+  const arrayBuffer = await response.arrayBuffer();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  return audioBuffer;
 }
 
-const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
-const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
-const chorus = new Tone.Chorus(4, 2.5, 0.5);
-const vol = new Tone.Volume(-15).toMaster();
-const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
+async function loadSamples(sampleData){
+  for (let i = 0; i < sampleData.length; i++) {
+    const sampleObj = sampleData[i];
+    const audioBuffer =  await getFile(sampleObj.path);
+    samples[i] = {
+      ...sampleObj,
+      sample: audioBuffer,
+      gainNode: audioContext.createGain(),
+      pannerNode: audioContext.createPanner(),
+      vol: 50,
+      pan: 0}
+  }
+}
 
+function playSample(sampleObj) {
+  let gain = sampleObj.vol * 2 / 100;
+  let pan = sampleObj.pan / 50;
+  console.log(sampleObj)
+  const audioBuffer = sampleObj.sample;
+  const sampleSource = audioContext.createBufferSource();
+  sampleSource.buffer = audioBuffer;
+  sampleSource.connect(audioContext.destination)
+  sampleSource.start();
+  return sampleSource;
+}
 
 //-----------------  STATE ----------------------
 
@@ -90,7 +120,7 @@ const notes = ['B', 'A#', 'A', 'G#', 'G', 'F#', 'F', 'E', 'D#', 'D', 'C#', 'C'];
 
 function loop(){
   let currentBeat = 0;
-  const offset = 150;  // used with setTimout to sync piano and synth
+  const sequencerOffset = 150;  // used with setTimout to sync piano and synth
 
 
   function nextTick(){
@@ -131,19 +161,19 @@ function loop(){
     const patternSamples      = state.sequencerSampleData[patternId];
     const sequencerColumn     = sequencerPattern[currentBeat];
 
-    function playSound(sample){
-      sample.pause();
-      sample.currentTime = 0;
-      sample.play();
-    }
+    // function playSound(sample){
+    //   sample.pause();
+    //   sample.currentTime = 0;
+    //   sample.play();
+    // }
 
     setTimeout(()=>{
       for (let row of sequencerColumn) {
         let sampleId = patternSamples[row];
-        playSound(samples[sampleId].sample);
+        playSample(samples[sampleId]);
       }
 
-    }, offset)
+    }, sequencerOffset)
   }
 
   function handleBeatLight(currentBeat){
@@ -155,14 +185,15 @@ function loop(){
         beatLights[currentBeat - 1].classList.remove('beatLightOn');
       }
       beatLights[currentBeat].classList.add('beatLightOn');
-    }, offset)
+    }, sequencerOffset)
 
   }
 
   setInterval(nextTick, 150);
 }
 
-function initialize(){
+async function initialize(){
+  await loadSamples(sampleData);
   let instrumentDiv = document.getElementById('instruments');
   let col1 = document.getElementById('column1');
   let col2 = document.getElementById('column2');
@@ -180,6 +211,17 @@ function initialize(){
 
 initialize();
 
+
+
+
 let playButton = document.getElementById('play')
 playButton.addEventListener('click', e => loop())
+
+
+
+// const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
+// const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
+// const chorus = new Tone.Chorus(4, 2.5, 0.5);
+// const vol = new Tone.Volume(-15).toMaster();
+// const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
 
