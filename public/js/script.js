@@ -2,7 +2,7 @@
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-const samples = {};
+const samples = {}; // TODO move vol & pan to state
 
 const sampleData = [
   {kit: '808', name:'kick', path: 'samples/808/kick.wav'},
@@ -73,6 +73,15 @@ function playSample(sampleObj) {
   sampleSource.start();
   return sampleSource;
 }
+
+
+const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
+const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
+const chorus = new Tone.Chorus(4, 2.5, 0.5);
+const vol = new Tone.Volume(-15).toMaster();
+const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
+
+
 
 //-----------------  STATE ----------------------
 
@@ -221,10 +230,4 @@ let playButton = document.getElementById('play')
 playButton.addEventListener('click', e => loop())
 
 
-
-// const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
-// const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
-// const chorus = new Tone.Chorus(4, 2.5, 0.5);
-// const vol = new Tone.Volume(-15).toMaster();
-// const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
 
