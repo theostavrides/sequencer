@@ -198,8 +198,8 @@ function renderOptions(newPatternNum){
     let sample = samples[sampleId];
     let sampleDropdown = sampleDropdowns[i];
     renderSampleName(sampleDropdown, sample.kit, sample.name)
-    renderVolume(i, sample.volume);
-    renderPan(i, sample.volume);
+    renderVolume(i, sample.vol);
+    renderPan(i, sample.pan);
   }
 
   function renderSampleName(node, kitname, sampleName) {
