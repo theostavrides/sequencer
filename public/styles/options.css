@@ -5,6 +5,7 @@
   background-color: orange;
   box-shadow: -1px 2px 2px black, 1px 0.5px 2px black;
   margin-top: 19px;
+  cursor: default;
 }
 
 .options #optionsBox {
@@ -49,7 +50,6 @@
   transform: perspective(4px) rotateX(1deg);
   border: 1px solid #615050;
   border-bottom: none;
-  cursor: default;
 }
 
 .options .tab p {
@@ -61,7 +61,7 @@
 
 /* Sequencer Options */
 
-.options #sequencerOptions, #synthesizerOptions {
+#sequencerOptions, #synthesizerOptions {
   height: 100%;
   width: 100%;
   display: flex;
@@ -96,25 +96,32 @@
 #sequencerOptionsGrid .sampleDropdown {
   width: 80%;
   border: 1px solid dimgray;
-  cursor: default;
-
 }
 
 #sequencerOptionsGrid .sampleDropdown:hover {
   background-color: mediumaquamarine;
 }
 
-#sequencerOptionsGrid .sampleDropdown.selected {
+#sequencerOptionsGrid .selected {
   background-color: mediumaquamarine;
 }
 
-.options .panbox {
+#sequencerOptionsGrid .volbox, #sequencerOptionsGrid .panbox {
+  font-family: inherit;
+  text-align: center;
   width: 30px;
   border: 1px solid dimgray;
+  background-color: inherit;
 }
 
-.options .volbox {
-  width: 30px;
-  border: 1px solid dimgray;
+#sequencerOptionsGrid .volbox:focus,
+#sequencerOptionsGrid .volbox:hover,
+#sequencerOptionsGrid .panbox:focus,
+#sequencerOptionsGrid .panbox:hover  {
+  background-color: mediumaquamarine;
 }
 
+#sequencerOptionsGrid .volbox.invalid,
+#sequencerOptionsGrid .panbox.invalid {
+  background-color: orangered;
+}

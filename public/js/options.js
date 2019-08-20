@@ -70,6 +70,7 @@ function createOptionsPanel(parent){
       rowNumber.classList.add('rowNumber');
       rowNumber.innerHTML = i + 1;
 
+      // Sample Select Box
       const sample = document.createElement('div');
       sample.classList.add('sample');
       const sampleDropdown = document.createElement('div');
@@ -77,17 +78,23 @@ function createOptionsPanel(parent){
       sampleDropdown.setAttribute('row', i);
       sample.appendChild(sampleDropdown);
 
+      // Volume Input
       const volume = document.createElement('div');
       volume.classList.add('volume');
-      const volbox = document.createElement('div');
+      const volbox = document.createElement('input');
+      volbox.maxLength = 3;
+      volbox.setAttribute('row', i);
       volbox.classList.add('volbox');
       volume.appendChild(volbox);
 
 
+      // Pan Input
       const pan = document.createElement('div');
       pan.classList.add('pan');
-      const panbox = document.createElement('div');
+      const panbox = document.createElement('input');
       panbox.classList.add('panbox');
+      panbox.maxLength = 3;
+      panbox.setAttribute('row', i);
       pan.appendChild(panbox);
 
       grid.appendChild(rowNumber);
@@ -108,13 +115,11 @@ function createOptionsPanel(parent){
     return synthesizerOptions;
   }
 
-  //                 EVENT LISTENERS
+  //                EVENT LISTENERS
 
   function addEventListeners(){
     addTabClickListener();
     addOptionsGridListener();
-
-    // Sample dropdown menu click events
   }
 
   function addOptionsGridListener(){
@@ -122,9 +127,9 @@ function createOptionsPanel(parent){
     grid.addEventListener('click', gridClick)
 
     function gridClick(e){
-      if (e.target.classList.contains('sampleDropdown')){
-        sampleClick(e);
-      }
+      if (e.target.classList.contains('sampleDropdown')) sampleClick(e);
+      if (e.target.classList.contains('volbox')) volClick(e);
+      if (e.target.classList.contains('panbox')) panClick(e);
     }
 
     function sampleClick(e){
@@ -137,13 +142,49 @@ function createOptionsPanel(parent){
     }
 
     function volClick(e){
+      const volbox = e.target;
+      state.allowKeyboardShortcuts = false;
 
+      volbox.addEventListener('input', validateVolume)
+      volbox.addEventListener('focusout', clickOut);
     }
 
     function panClick(e){
-
+      const panbox = e.target;
+      state.allowKeyboardShortcuts = false;
+      panbox.addEventListener('input', validatePan)
+      panbox.addEventListener('focusout', enableKeyboardShortcuts);
     }
 
+    // Event Helpers
+    function clickOut(e){
+      state.allowKeyboardShortcuts = true;
+      e.target.removeEventListener('focusout', enableKeyboardShortcuts)
+      e.target.removeEventListener('input', validateVolume) || e.target.removeEventListener('input', validatePan)
+    }
+
+    function validateVolume(e){
+      let inp = Number(e.target.value);
+      if (inp >= 0 && inp <= 100) {
+        e.target.classList.remove('invalid');
+      } else {
+        e.target.classList.add('invalid');
+      }
+    }
+
+    function validatePan(e){
+      let inp = Number(e.target.value);
+      if (inp >= -50 && inp <= 50) {
+        e.target.classList.remove('invalid');
+      } else {
+        e.target.classList.add('invalid');
+      }
+    }
+
+    function enableKeyboardShortcuts(e){
+      state.allowKeyboardShortcuts = true;
+      e.target.removeEventListener('focusout', enableKeyboardShortcuts)
+    }
   }
 
   function addTabClickListener(){
@@ -207,11 +248,11 @@ function renderOptions(newPatternNum){
   }
 
   function renderVolume(index, volumeVal){
-    volBoxes[index].innerHTML = volumeVal;
+    volBoxes[index].value = volumeVal;
   }
 
   function renderPan(index, panVal){
-    panBoxes[index].innerHTML = panVal;
+    panBoxes[index].value = panVal;
 
   }
 }

@@ -46,6 +46,7 @@ function addKeyBoardShortcuts(){
   document.addEventListener('keydown', numberEvents);
 
   function numberEvents(e){
+    if (!state.allowKeyboardShortcuts) return; //make sure user isn't inputing values elsewhere
     let key = parseInt(e.key);
     let patternIndex = key === 0 ? 9 : key - 1;
     if (!(typeof key == 'number' && key < 10 && key >= 0)) return;

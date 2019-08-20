@@ -48,20 +48,28 @@ async function loadSamples(sampleData){
       ...sampleObj,
       sample: audioBuffer,
       gainNode: audioContext.createGain(),
-      pannerNode: audioContext.createPanner(),
+      pannerNode: audioContext.createStereoPanner(),
       vol: 50,
       pan: 0}
   }
 }
 
 function playSample(sampleObj) {
-  let gain = sampleObj.vol * 2 / 100;
-  let pan = sampleObj.pan / 50;
-  console.log(sampleObj)
+  const gain = sampleObj.vol * 2 / 100;
+  const pan = sampleObj.pan / 50;
+
+  const gainNode = sampleObj.gainNode;
+  gainNode.gain.value = gain;
+
+  const pannerNode = sampleObj.pannerNode;
+  console.log(pannerNode)
+  pannerNode.pan.value = pan;
+
   const audioBuffer = sampleObj.sample;
   const sampleSource = audioContext.createBufferSource();
   sampleSource.buffer = audioBuffer;
-  sampleSource.connect(audioContext.destination)
+
+  sampleSource.connect(gainNode).connect(pannerNode).connect(audioContext.destination)
   sampleSource.start();
   return sampleSource;
 }
@@ -70,6 +78,7 @@ function playSample(sampleObj) {
 
 const state = {
   currentPatternView: 1,
+  allowKeyboardShortcuts: true,
   patternOnOffState: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
   activeOptionsTabs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // if sequencer or synthesizer is active in each pattern
   selectedSampleDropDown: null,
@@ -160,12 +169,6 @@ function loop(){
     const sequencerPattern    = state.sequencerData[patternId];
     const patternSamples      = state.sequencerSampleData[patternId];
     const sequencerColumn     = sequencerPattern[currentBeat];
-
-    // function playSound(sample){
-    //   sample.pause();
-    //   sample.currentTime = 0;
-    //   sample.play();
-    // }
 
     setTimeout(()=>{
       for (let row of sequencerColumn) {
