@@ -41,7 +41,7 @@ const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedb
 const state = {
   currentPatternView: 1,
   patternOnOffState: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-  activeOptionsTabs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // State of options tabs (sequencer or synthesizer) is active in each pattern
+  activeOptionsTabs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // if sequencer or synthesizer is active in each pattern
   selectedSampleDropDown: null,
   pianoData: [
     [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
@@ -159,7 +159,7 @@ function loop(){
 
   }
 
-  setInterval(nextTick, 100);
+  setInterval(nextTick, 150);
 }
 
 function initialize(){
