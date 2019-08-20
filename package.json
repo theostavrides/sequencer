@@ -1,0 +1,24 @@
+{
+  "name": "sequencer",
+  "version": "1.0.0",
+  "description": "A set of sequencers for music composition within the browser.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theostavrides/sequencer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theostavrides/sequencer/issues"
+  },
+  "homepage": "https://github.com/theostavrides/sequencer#readme",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1"
+  }
+}
