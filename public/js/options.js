@@ -173,7 +173,6 @@ function createOptionsPanel(parent){
         let pattern = state.currentPatternView;
         let sampleNumber = state.sequencerSampleData[pattern][row]
         samples[sampleNumber].vol = inp;
-        console.log(samples[sampleNumber])
       } else {
         e.target.classList.add('invalid');
       }
@@ -183,6 +182,11 @@ function createOptionsPanel(parent){
       let inp = Number(e.target.value);
       if (inp >= -50 && inp <= 50) {
         e.target.classList.remove('invalid');
+        let row = e.target.getAttribute('row');
+        let pattern = state.currentPatternView;
+        let sampleNumber = state.sequencerSampleData[pattern][row]
+        console.log(inp)
+        samples[sampleNumber].pan = inp;
       } else {
         e.target.classList.add('invalid');
       }
