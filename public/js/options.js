@@ -115,7 +115,7 @@ function createOptionsPanel(parent){
     return synthesizerOptions;
   }
 
-  //                EVENT LISTENERS
+  //                   EVENT LISTENERS
 
   function addEventListeners(){
     addTabClickListener();
@@ -144,7 +144,7 @@ function createOptionsPanel(parent){
     function volClick(e){
       const volbox = e.target;
       state.allowKeyboardShortcuts = false;
-
+      // validate form input
       volbox.addEventListener('input', validateVolume)
       volbox.addEventListener('focusout', clickOut);
     }
@@ -152,6 +152,7 @@ function createOptionsPanel(parent){
     function panClick(e){
       const panbox = e.target;
       state.allowKeyboardShortcuts = false;
+      // validate form input
       panbox.addEventListener('input', validatePan)
       panbox.addEventListener('focusout', enableKeyboardShortcuts);
     }
@@ -165,8 +166,14 @@ function createOptionsPanel(parent){
 
     function validateVolume(e){
       let inp = Number(e.target.value);
+      console.log(inp)
       if (inp >= 0 && inp <= 100) {
         e.target.classList.remove('invalid');
+        let row = e.target.getAttribute('row');
+        let pattern = state.currentPatternView;
+        let sampleNumber = state.sequencerSampleData[pattern][row]
+        samples[sampleNumber].vol = inp;
+        console.log(samples[sampleNumber])
       } else {
         e.target.classList.add('invalid');
       }

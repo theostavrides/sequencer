@@ -57,12 +57,12 @@ async function loadSamples(sampleData){
 function playSample(sampleObj) {
   const gain = sampleObj.vol * 2 / 100;
   const pan = sampleObj.pan / 50;
+  console.log(gain)
 
   const gainNode = sampleObj.gainNode;
   gainNode.gain.value = gain;
 
   const pannerNode = sampleObj.pannerNode;
-  console.log(pannerNode)
   pannerNode.pan.value = pan;
 
   const audioBuffer = sampleObj.sample;
