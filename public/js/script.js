@@ -226,7 +226,7 @@ initialize();
 
 
 
-let playButton = document.getElementById('play')
+let playButton = document.getElementById('playPauseButton')
 playButton.addEventListener('click', e => loop())
 
 

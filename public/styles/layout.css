@@ -24,9 +24,3 @@ body::-webkit-scrollbar { /* WebKit */
   padding-right: 20px;
 }
 
-#play {
-  height: 20px;
-  width: 20px;
-  padding-left: 20px;
-  padding-top: 30px;
-}

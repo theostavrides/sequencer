@@ -11,84 +11,95 @@
   <link rel="stylesheet" type="text/css" href="styles/samplesMenu.css">
 </head>
 <body>
-
-    <nav>
-        <h1>Jam.js</h1>
-        <div id="patterns">
-          <div class="patternBox selected playing">
-            <p>1</p>
-            <img src="images/stop.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>2</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>3</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>4</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>5</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>6</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>7</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>8</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>9</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-          <div class="patternBox">
-            <p>0</p><img src="images/greenplay.png"/>
-            <div class="patternLightBox">
-              <div class="patternLight"></div>
-            </div>
-          </div>
-
+  <nav>
+    <h1>Jam.js</h1>
+    <div id="patterns">
+      <div class="patternBox selected playing">
+        <p>1</p>
+        <img src="images/stop.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
         </div>
-        <div id="playpause">
-          <!-- <img src="images/pause.png" id="pause" /> -->
+      </div>
+      <div class="patternBox">
+        <p>2</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
         </div>
-    </nav>
+      </div>
+      <div class="patternBox">
+        <p>3</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>4</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>5</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>6</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>7</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>8</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>9</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
+      <div class="patternBox">
+        <p>0</p><img src="images/greenplay.png"/>
+        <div class="patternLightBox">
+          <div class="patternLight"></div>
+        </div>
+      </div>
 
-    <div id="instruments">
-      <div id="column1"></div>
-      <div id="column2"></div>
     </div>
 
-    <img src="images/play.png" id="play" />
+    <div id="MasterAndBpmWrapper">
+      <div id="BPM">
+        <div>
+          <div>B</div>
+          <div>P</div>
+          <div>M</div>
+        </div>
+        <div>
+          <input />
+        </div>
+      </div>
+      <div id="master">
+        <img src="images/pause.png" id="playPauseButton" />
+      </div>
+    </div>
+  </nav>
+
+  <div id="instruments">
+    <div id="column1"></div>
+    <div id="column2"></div>
+  </div>
+
 
 
 
