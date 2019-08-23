@@ -204,7 +204,7 @@ function loop(){
   setInterval(nextTick, 150);
 }
 
-async function initialize(){
+async function init(){
   await loadSamples(sampleData);
   let instrumentDiv = document.getElementById('instruments');
   let col1 = document.getElementById('column1');
@@ -221,7 +221,7 @@ async function initialize(){
 }
 
 
-initialize();
+init();
 
 
 

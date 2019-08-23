@@ -20,7 +20,7 @@ body::-webkit-scrollbar { /* WebKit */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
