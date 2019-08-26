@@ -172,6 +172,8 @@ nav #master {
 }
 
 nav #playPauseButton {
+  padding: 5px;
+  margin: 0;
   align-self: center;
   height:25px;
   width:25px;

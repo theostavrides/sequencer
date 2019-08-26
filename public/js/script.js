@@ -57,7 +57,6 @@ async function loadSamples(sampleData){
 function playSample(sampleObj) {
   const gain = sampleObj.vol * 2 / 100;
   const pan = sampleObj.pan / 50;
-  console.log(gain)
 
   const gainNode = sampleObj.gainNode;
   gainNode.gain.value = gain;
@@ -87,7 +86,6 @@ const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedb
 
 const state = {
   playing: false,
-  BPM: 100,
   currentBeat: 0,
   millisecondsPerQuarterNote: 125,
   currentPatternView: 1,
@@ -140,30 +138,30 @@ const notes = ['B', 'A#', 'A', 'G#', 'G', 'F#', 'F', 'E', 'D#', 'D', 'C#', 'C'];
 
 // --------------- SEQUENCER LOOP -------------------
 
-let currentBeat = 0;
-const sequencerOffset = 150;
 
-function start(){
+function play(){
   state.playing = true;
 
   function loop(){
-    handleBeatLight(currentBeat);
-    playColumn(currentBeat);
-    currentBeat >= 15 ? currentBeat = 0 : currentBeat++;
-    if (state.playing) setTimeout(loop, state.millisecondsPerQuarterNote);
+    if (state.playing){
+      handleBeatLight();
+      playColumn();
+      state.currentBeat >= 15 ? state.currentBeat = 0 : state.currentBeat++;
+      setTimeout(loop, state.millisecondsPerQuarterNote);
+    }
   }
 
-  function playColumn(currentBeat){
+  function playColumn(){
     for (let i = 0; i < state.patternOnOffState.length; i++) {
       if (state.patternOnOffState[i]) {
-        playSequencerColumn(i, currentBeat);
-        playPianoColumn(state.pianoData[i], currentBeat);
+        playSequencerColumn(i);
+        playPianoColumn(state.pianoData[i]);
       }
     }
   }
 
-  function playPianoColumn(pianoPattern, currentBeat){
-    const pianoColumn = pianoPattern[currentBeat];
+  function playPianoColumn(pianoPattern){
+    const pianoColumn = pianoPattern[state.currentBeat];
 
     function getNote(gridRowNumber){
       if (gridRowNumber < 12){
@@ -180,40 +178,36 @@ function start(){
     }
   }
 
-  function playSequencerColumn(patternId, currentBeat){
+  function playSequencerColumn(patternId){
     const sequencerPattern    = state.sequencerData[patternId];
     const patternSamples      = state.sequencerSampleData[patternId];
-    const sequencerColumn     = sequencerPattern[currentBeat];
+    const sequencerColumn     = sequencerPattern[state.currentBeat];
 
-    //use setTImeout to add the offset time
-    setTimeout(()=>{
-      for (let row of sequencerColumn) {
-        let sampleId = patternSamples[row];
-        playSample(samples[sampleId]);
-      }
-
-    }, sequencerOffset)
+    for (let row of sequencerColumn) {
+      let sampleId = patternSamples[row];
+      playSample(samples[sampleId]);
+    }
   }
 
-  function handleBeatLight(currentBeat){
+  function handleBeatLight(){
     const beatLights = document.getElementsByClassName('beatLightGrid')[0].children;
-
-    //use setTImeout to add the offset time
-    setTimeout(()=>{
-      if (currentBeat === 0) {
-        beatLights[15].classList.remove('beatLightOn');
-      } else {
-        beatLights[currentBeat - 1].classList.remove('beatLightOn');
-      }
-      beatLights[currentBeat].classList.add('beatLightOn');
-    }, sequencerOffset)
-
+    if (state.currentBeat === 0) {
+      beatLights[15].classList.remove('beatLightOn');
+    } else {
+      beatLights[state.currentBeat - 1].classList.remove('beatLightOn');
+    }
+    beatLights[state.currentBeat].classList.add('beatLightOn');
   }
 
   loop();
 }
 
-
+function pause(){
+  state.playing = false;
+  const beatLights = document.getElementsByClassName('beatLightGrid')[0].children;
+  beatLights[state.currentBeat -1].classList.remove('beatLightOn');
+  state.currentBeat = 0;
+}
 
 async function init(){
   await loadSamples(sampleData);
@@ -237,7 +231,55 @@ init();
 // ----------------------- PLAY/PAUSE BUTTON ---------------------
 
 let playButton = document.getElementById('playPauseButton')
-playButton.addEventListener('click', e => {start()})
+playButton.addEventListener('click', e => {
+  if (state.playing) {
+    pause();
+    state.playing = false;
+    e.target.src = '/images/play.png'
+  } else {
+    play();
+    state.playing = true;
+    e.target.src = '/images/pause.png'
+  }
+})
+
+// ------------------------- BPM INPUT ---------------------------
+
+let BPMinput = document.querySelector('#BPM input');
+
+function changeTempo(BPM){
+  let cleanBPM = Number(BPM);
+  if (cleanBPM) state.millisecondsPerQuarterNote = 1000 * 60 / BPM / 4;
+}
+
+BPMinput.addEventListener('focusin', e => {
+  state.allowKeyboardShortcuts = false;
+});
+
+BPMinput.addEventListener('focusout', e => {
+  state.allowKeyboardShortcuts = true;
+  changeTempo(e.target.value)
+})
+
+BPMinput.addEventListener('input', e => {
+  let inp = Number(e.target.value);
+  if (inp >= 0 && inp <= 9999) {
+    e.target.classList.remove('invalid');
+  } else {
+    e.target.classList.add('invalid');
+  }
+});
+
+BPMinput.addEventListener('keyup', e => {
+  if (e.key === "Enter") {
+    changeTempo(e.target.value)
+  }
+})
+
+
+
+
+
 
 
 

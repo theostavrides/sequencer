@@ -166,7 +166,7 @@ function createOptionsPanel(parent){
 
     function validateVolume(e){
       let inp = Number(e.target.value);
-      console.log(inp)
+
       if (inp >= 0 && inp <= 100) {
         e.target.classList.remove('invalid');
         let row = e.target.getAttribute('row');
