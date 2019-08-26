@@ -86,6 +86,10 @@ const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedb
 //-----------------  STATE ----------------------
 
 const state = {
+  playing: false,
+  BPM: 100,
+  currentBeat: 0,
+  millisecondsPerQuarterNote: 125,
   currentPatternView: 1,
   allowKeyboardShortcuts: true,
   patternOnOffState: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -139,11 +143,14 @@ const notes = ['B', 'A#', 'A', 'G#', 'G', 'F#', 'F', 'E', 'D#', 'D', 'C#', 'C'];
 let currentBeat = 0;
 const sequencerOffset = 150;
 
-function loop(){
-  function nextTick(){
+function start(){
+  state.playing = true;
+
+  function loop(){
     handleBeatLight(currentBeat);
     playColumn(currentBeat);
     currentBeat >= 15 ? currentBeat = 0 : currentBeat++;
+    if (state.playing) setTimeout(loop, state.millisecondsPerQuarterNote);
   }
 
   function playColumn(currentBeat){
@@ -178,6 +185,7 @@ function loop(){
     const patternSamples      = state.sequencerSampleData[patternId];
     const sequencerColumn     = sequencerPattern[currentBeat];
 
+    //use setTImeout to add the offset time
     setTimeout(()=>{
       for (let row of sequencerColumn) {
         let sampleId = patternSamples[row];
@@ -189,6 +197,8 @@ function loop(){
 
   function handleBeatLight(currentBeat){
     const beatLights = document.getElementsByClassName('beatLightGrid')[0].children;
+
+    //use setTImeout to add the offset time
     setTimeout(()=>{
       if (currentBeat === 0) {
         beatLights[15].classList.remove('beatLightOn');
@@ -200,8 +210,10 @@ function loop(){
 
   }
 
-  setInterval(nextTick, 150);
+  loop();
 }
+
+
 
 async function init(){
   await loadSamples(sampleData);
@@ -222,11 +234,10 @@ async function init(){
 
 init();
 
-
-
+// ----------------------- PLAY/PAUSE BUTTON ---------------------
 
 let playButton = document.getElementById('playPauseButton')
-playButton.addEventListener('click', e => loop())
+playButton.addEventListener('click', e => {start()})
 
 
 
