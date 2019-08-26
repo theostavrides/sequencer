@@ -136,11 +136,10 @@ const notes = ['B', 'A#', 'A', 'G#', 'G', 'F#', 'F', 'E', 'D#', 'D', 'C#', 'C'];
 
 // --------------- SEQUENCER LOOP -------------------
 
+let currentBeat = 0;
+const sequencerOffset = 150;
+
 function loop(){
-  let currentBeat = 0;
-  const sequencerOffset = 150;  // used with setTimout to sync piano and synth
-
-
   function nextTick(){
     handleBeatLight(currentBeat);
     playColumn(currentBeat);
