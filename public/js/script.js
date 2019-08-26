@@ -74,12 +74,13 @@ function playSample(sampleObj) {
 }
 
 
-const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
-const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
-const chorus = new Tone.Chorus(4, 2.5, 0.5);
+// const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
+// const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
+// const chorus = new Tone.Chorus(4, 2.5, 0.5);
 const vol = new Tone.Volume(-15).toMaster();
-const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
+// const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
 
+const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol);
 
 
 //-----------------  STATE ----------------------
@@ -175,6 +176,7 @@ function play(){
 
     for (let e of pianoColumn) {
       synth.triggerAttackRelease(getNote(e), '8n');
+
     }
   }
 
@@ -182,11 +184,13 @@ function play(){
     const sequencerPattern    = state.sequencerData[patternId];
     const patternSamples      = state.sequencerSampleData[patternId];
     const sequencerColumn     = sequencerPattern[state.currentBeat];
+    setTimeout(()=>{
+      for (let row of sequencerColumn) {
+        let sampleId = patternSamples[row];
+        playSample(samples[sampleId]);
+      }
+    }, 100)
 
-    for (let row of sequencerColumn) {
-      let sampleId = patternSamples[row];
-      playSample(samples[sampleId]);
-    }
   }
 
   function handleBeatLight(){
