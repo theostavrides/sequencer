@@ -6,4 +6,5 @@ A music composition program for the browser
 
 ## Installation 
 1. Download this repository
-2. Open index.html
+2. cd into the folder
+3. type ```node server.js``` to start
