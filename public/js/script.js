@@ -271,7 +271,7 @@ playButton.addEventListener('click', e => {
   } else {
     play();
     state.playing = true;
-    e.target.src = '/images/stop.png'
+    e.target.src = '/images/stop2.png'
   }
 })
 
