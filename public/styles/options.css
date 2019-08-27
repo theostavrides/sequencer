@@ -121,3 +121,10 @@
   background-color: mediumaquamarine;
 }
 
+
+#sequencerOptionsGrid .volbox.invalid,
+#sequencerOptionsGrid .panbox.invalid {
+  background-color: orangered;
+}
+
+

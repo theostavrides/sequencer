@@ -234,7 +234,7 @@ function play(){
   loop();
 }
 
-function pause(){
+function stop(){
   state.playing = false;
   const beatLights = document.getElementsByClassName('beatLightGrid')[0].children;
   beatLights[state.currentBeat -1].classList.remove('beatLightOn');
@@ -260,20 +260,34 @@ async function init(){
 
 init();
 
-// ----------------------- PLAY/PAUSE BUTTON ---------------------
+// ----------------------- PLAY/PAUSE --------------------------
 
-let playButton = document.getElementById('playPauseButton')
+//button
+let playButton = document.getElementById('playPauseButton');
+
 playButton.addEventListener('click', e => {
   if (state.playing) {
-    pause();
-    state.playing = false;
-    e.target.src = '/images/play.png'
+    stop();
+    e.target.src = '/images/play.png';
   } else {
     play();
-    state.playing = true;
-    e.target.src = '/images/stop2.png'
+    e.target.src = '/images/stop2.png';
   }
 })
+
+//spacebar
+document.addEventListener('keyup', e => {
+  if (e.keyCode == 32){
+    if (state.playing){
+      stop();
+      playButton.src = '/images/play.png';
+    } else {
+      play();
+      playButton.src = '/images/stop2.png';
+    }
+  }
+})
+
 
 // ------------------------- BPM INPUT ---------------------------
 
