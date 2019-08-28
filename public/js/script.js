@@ -1,60 +1,4 @@
-//------------------ AUDIO ---------------------
-
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-const samples = {};
-
-async function getFile(filepath) {
-  const response = await fetch(filepath);
-  const arrayBuffer = await response.arrayBuffer();
-  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-  return audioBuffer;
-}
-
-async function loadSamples(sampleData){
-  for (let i = 0; i < sampleData.length; i++) {
-    const sampleObj = sampleData[i];
-    const audioBuffer =  await getFile(sampleObj.path);
-    samples[i] = {
-      ...sampleObj,
-      sample: audioBuffer,
-      gainNode: audioContext.createGain(),
-      pannerNode: audioContext.createStereoPanner(),
-      vol: 50,
-      pan: 0}
-  }
-}
-
-function playSample(sampleObj) {
-  const gain = sampleObj.vol * 2 / 100;
-  const pan = sampleObj.pan / 50;
-
-  const gainNode = sampleObj.gainNode;
-  gainNode.gain.value = gain;
-
-  const pannerNode = sampleObj.pannerNode;
-  pannerNode.pan.value = pan;
-
-  const audioBuffer = sampleObj.sample;
-  const sampleSource = audioContext.createBufferSource();
-  sampleSource.buffer = audioBuffer;
-
-  sampleSource.connect(gainNode).connect(pannerNode).connect(audioContext.destination)
-  sampleSource.start();
-  return sampleSource;
-}
-
-
-// const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
-// const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
-// const chorus = new Tone.Chorus(4, 2.5, 0.5);
-const vol = new Tone.Volume(-15).toMaster();
-// const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
-
-const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol);
-
-
-//-----------------  STATE ----------------------
+//--------------------  STATE ----------------------
 
 const state = {
   playing: false,
@@ -90,8 +34,8 @@ const state = {
     [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
   ],
   sequencerSampleData: [
-    [0,1,2,3,4,5],
-    [6,7,8,9,10,11],
+    [5,4,3,2,1,0],
+    [11,4,3,2,1,0],
     [12,13,14,3,4,5],
     [15, 16,17,18,19,20],
     [21,22,23,1,2,3],
@@ -99,9 +43,50 @@ const state = {
     [0,1,2,3,4,5],
     [0,1,2,3,4,5],
     [0,1,2,3,4,5],
-    [0,1,2,3,4,5],
+    [10,1,2,3,4,5],
   ]
 }
+
+//------------------ AUDIO ---------------------
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+const samples = {};
+
+async function getFile(filepath) {
+  const response = await fetch(filepath);
+  const arrayBuffer = await response.arrayBuffer();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  return audioBuffer;
+}
+
+async function loadSamples(sampleData){
+  for (let i = 0; i < sampleData.length; i++) {
+    const sampleObj = sampleData[i];
+    const audioBuffer =  await getFile(sampleObj.path);
+    samples[i] = {
+      ...sampleObj,
+      sample: audioBuffer,
+      gainNode: audioContext.createGain(),
+      pannerNode: audioContext.createStereoPanner(),
+      vol: 50,
+      pan: 0}
+  }
+}
+
+
+//-------------------- TONEJS -----------------------
+const vol = new Tone.Volume(-15).toMaster();
+const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol);
+
+
+
+// const reverb = new Tone.JCReverb(0.9).connect(Tone.Master);
+// const feedbackDelay = new Tone.FeedbackDelay("8n", 0.1).toMaster();
+// const chorus = new Tone.Chorus(4, 2.5, 0.5);
+// const synth = new Tone.PolySynth(6, Tone.Synth).chain(vol, chorus, reverb, feedbackDelay);
+
+
 
 //-----------------  CONSTANTS ----------------------
 
@@ -121,6 +106,25 @@ function play(){
       state.currentBeat >= 15 ? state.currentBeat = 0 : state.currentBeat++;
       setTimeout(loop, state.millisecondsPerQuarterNote);
     }
+  }
+
+  function playSample(sampleObj) {
+    const gain = sampleObj.vol * 2 / 100;
+    const pan = sampleObj.pan / 50;
+
+    const gainNode = sampleObj.gainNode;
+    gainNode.gain.value = gain;
+
+    const pannerNode = sampleObj.pannerNode;
+    pannerNode.pan.value = pan;
+
+    const audioBuffer = sampleObj.sample;
+    const sampleSource = audioContext.createBufferSource();
+    sampleSource.buffer = audioBuffer;
+
+    sampleSource.connect(gainNode).connect(pannerNode).connect(audioContext.destination)
+    sampleSource.start();
+    return sampleSource;
   }
 
   function playColumn(){
@@ -186,7 +190,6 @@ function stop(){
 
 async function init(){
   const sampleData = await fetch('/samplesmetadata').then(res => res.json());
-  console.log(sampleData)
   await loadSamples(sampleData);
   let instrumentDiv = document.getElementById('instruments');
   let col1 = document.getElementById('column1');
@@ -266,5 +269,6 @@ BPMinput.addEventListener('keyup', e => {
     changeTempo(e.target.value)
   }
 })
+
 
 
