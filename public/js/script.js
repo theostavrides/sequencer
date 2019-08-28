@@ -2,7 +2,7 @@
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-const samples = {}; // TODO move vol & pan to state
+const samples = {};
 
 const sampleData = [
   {kit: '808', name:'kick', path: 'samples/808/kick.wav'},
