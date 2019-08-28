@@ -11,11 +11,10 @@ app.use(express.static('public'))
 
 app.get('/', (req, res) => res.render('index'));
 
-app.get('/samplemetadata', (req, res) => {
+app.get('/samplesmetadata', (req, res) => {
   getSamplesMetaData('./public/samples/').then(sampleObjs => {
     res.json(sampleObjs);
   })
-
 })
 
 app.listen(port, () => console.log(`Jam.js server listening on port ${port}!`));
