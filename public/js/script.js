@@ -57,9 +57,8 @@ const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 function createSampleObjects(samplesMetaData) {
   /*
-    This function takes samplesMetaData, which is fetched from the server, and contains information
-    about all the available samples in /public/samples.  The data is used here in order to build the
-    data structure of state.samples.
+    SamplesMetaData is fetched from the server and contains information about all the available samples
+    in /public/samples.  The data is used to build the data structure of state.samples.
   */
   samplesMetaData.forEach(sampleMetaData => {
     state.samples[Object.keys(state.samples).length] = {
@@ -74,6 +73,11 @@ function createSampleObjects(samplesMetaData) {
 }
 
 async function loadInitialSamples(samplesData){
+  /*
+    After state.samples is built, this function loads the audio buffers for each sample
+    in state.initialKits.  The remaining audio buffers are lazy loaded when required by
+    the user (I.E. When a sample is clicked in the sample menu).
+  */
   for (let key in samplesData) {
     let sampleObj = samplesData[key];
     if (state.initialKitsToLoad.includes(sampleObj.kit)) {
@@ -82,16 +86,12 @@ async function loadInitialSamples(samplesData){
   }
 }
 
-
 async function loadSampleAudioBuffer(sampleObj) {
   const response = await fetch(sampleObj.path);
   const arrayBuffer = await response.arrayBuffer();
   const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
   sampleObj.sample = audioBuffer;
 }
-
-
-
 
 
 //-------------------- TONEJS -----------------------

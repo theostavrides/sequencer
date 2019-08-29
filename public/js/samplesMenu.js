@@ -112,10 +112,16 @@ function createSamplesMenu(parent){
       //if a sample in the menu is clicked
       if (e.target.classList.contains('menuSample') ||
           e.target.parentNode.classList.contains('menuSample')) {
-        let sampleid = e.target.getAttribute('sampleid') || e.target.parentNode.getAttribute('sampleid');
+        const sampleid = e.target.getAttribute('sampleid') || e.target.parentNode.getAttribute('sampleid');
         //change state.sequencerSampleData
         state.sequencerSampleData[state.selectedSampleDropDown.pattern][state.selectedSampleDropDown.row] = parseInt(sampleid)
         renderOptions(state.currentPatternView);
+
+        //Lazy load the sample if it hasn't been loaded already
+        const sampleObj = state.samples[sampleid];
+        if (!sampleObj.sample) {
+          loadSampleAudioBuffer(sampleObj);
+        }
       }
 
     }
