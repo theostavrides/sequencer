@@ -172,7 +172,7 @@ function createOptionsPanel(parent){
         let row = e.target.getAttribute('row');
         let pattern = state.currentPatternView;
         let sampleNumber = state.sequencerSampleData[pattern][row]
-        samples[sampleNumber].vol = inp;
+        state.samples[sampleNumber].vol = inp;
       } else {
         e.target.classList.add('invalid');
       }
@@ -185,8 +185,7 @@ function createOptionsPanel(parent){
         let row = e.target.getAttribute('row');
         let pattern = state.currentPatternView;
         let sampleNumber = state.sequencerSampleData[pattern][row]
-        console.log(inp)
-        samples[sampleNumber].pan = inp;
+        state.samples[sampleNumber].pan = inp;
       } else {
         e.target.classList.add('invalid');
       }
@@ -247,7 +246,7 @@ function renderOptions(newPatternNum){
 
   for (let i = 0; i < 6; i++) {
     let sampleId = samplesToRender[i];
-    let sample = samples[sampleId];
+    let sample = state.samples[sampleId];
     let sampleDropdown = sampleDropdowns[i];
     renderSampleName(sampleDropdown, sample.kit, sample.name)
     renderVolume(i, sample.vol);

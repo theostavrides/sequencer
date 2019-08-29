@@ -58,8 +58,8 @@ function createSamplesMenu(parent){
   function renderSamples(parent) {
     const kitDivs = [];
     const kitNames = [];
-    for (let key in samples) {
-      const sample = samples[key];
+    for (let key in state.samples) {
+      const sample = state.samples[key];
       const kit = sample.kit;
       const name = sample.name;
       const kitId = 'folder' + kit;

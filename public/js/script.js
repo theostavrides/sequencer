@@ -9,6 +9,9 @@ const state = {
   patternOnOffState: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
   activeOptionsTabs: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // if sequencer or synthesizer is active in each pattern
   selectedSampleDropDown: null,
+  samplesData: null,
+  samples: {},
+  initialKitsToLoad: ['808', 'blackwater', 'shadows'],
   pianoData: [
     [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
     [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],
@@ -35,15 +38,15 @@ const state = {
   ],
   sequencerSampleData: [
     [5,4,3,2,1,0],
-    [11,4,3,2,1,0],
-    [12,13,14,3,4,5],
-    [15, 16,17,18,19,20],
-    [21,22,23,1,2,3],
-    [0,1,2,3,4,5],
-    [0,1,2,3,4,5],
-    [0,1,2,3,4,5],
-    [0,1,2,3,4,5],
-    [10,1,2,3,4,5],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
+    [5,4,3,2,1,0],
   ]
 }
 
@@ -51,28 +54,44 @@ const state = {
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-const samples = {};
 
-async function getFile(filepath) {
-  const response = await fetch(filepath);
-  const arrayBuffer = await response.arrayBuffer();
-  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-  return audioBuffer;
-}
-
-async function loadSamples(sampleData){
-  for (let i = 0; i < sampleData.length; i++) {
-    const sampleObj = sampleData[i];
-    const audioBuffer =  await getFile(sampleObj.path);
-    samples[i] = {
-      ...sampleObj,
-      sample: audioBuffer,
+function createSampleObjects(samplesMetaData) {
+  /*
+    This function takes samplesMetaData, which is fetched from the server, and contains information
+    about all the available samples in /public/samples.  The data is used here in order to build the
+    data structure of state.samples.
+  */
+  samplesMetaData.forEach(sampleMetaData => {
+    state.samples[Object.keys(state.samples).length] = {
+      ...sampleMetaData,
+      sample: null,
       gainNode: audioContext.createGain(),
       pannerNode: audioContext.createStereoPanner(),
       vol: 50,
-      pan: 0}
+      pan: 0
+    };
+  });
+}
+
+async function loadInitialSamples(samplesData){
+  for (let key in samplesData) {
+    let sampleObj = samplesData[key];
+    if (state.initialKitsToLoad.includes(sampleObj.kit)) {
+      await loadSampleAudioBuffer(sampleObj);
+    }
   }
 }
+
+
+async function loadSampleAudioBuffer(sampleObj) {
+  const response = await fetch(sampleObj.path);
+  const arrayBuffer = await response.arrayBuffer();
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  sampleObj.sample = audioBuffer;
+}
+
+
+
 
 
 //-------------------- TONEJS -----------------------
@@ -162,7 +181,7 @@ function play(){
     setTimeout(()=>{
       for (let row of sequencerColumn) {
         let sampleId = patternSamples[row];
-        playSample(samples[sampleId]);
+        playSample(state.samples[sampleId]);
       }
     }, 100)
 
@@ -189,8 +208,9 @@ function stop(){
 }
 
 async function init(){
-  const sampleData = await fetch('/samplesmetadata').then(res => res.json());
-  await loadSamples(sampleData);
+  state.samplesData = await fetch('/samplesmetadata').then(res => res.json());
+  await createSampleObjects(state.samplesData);
+  await loadInitialSamples(state.samples);
   let instrumentDiv = document.getElementById('instruments');
   let col1 = document.getElementById('column1');
   let col2 = document.getElementById('column2');
