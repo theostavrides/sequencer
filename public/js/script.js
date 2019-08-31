@@ -228,12 +228,12 @@ async function init(){
 
 init();
 
-// ----------------------- PLAY/PAUSE --------------------------
+// ----------------------- PLAY/STOP --------------------------
 
 //button
-let playButton = document.getElementById('playPauseButton');
+let playStopButton = document.getElementById('playStopButton');
 
-playButton.addEventListener('click', e => {
+playStopButton.addEventListener('click', e => {
   if (state.playing) {
     stop();
     e.target.src = '/images/play.png';
@@ -248,10 +248,10 @@ document.addEventListener('keyup', e => {
   if (e.keyCode == 32){
     if (state.playing){
       stop();
-      playButton.src = '/images/play.png';
+      playStopButton.src = '/images/play.png';
     } else {
       play();
-      playButton.src = '/images/stop2.png';
+      playStopButton.src = '/images/stop2.png';
     }
   }
 })
