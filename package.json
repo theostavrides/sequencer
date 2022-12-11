@@ -19,6 +19,6 @@
   "homepage": "https://github.com/theostavrides/sequencer#readme",
   "dependencies": {
     "ejs": "^2.6.2",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
